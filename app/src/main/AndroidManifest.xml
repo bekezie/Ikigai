@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ikigai">
         <activity
-            android:name=".Profile"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Register"
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".WorksheetDetails"

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "510649194648",
+    "firebase_url": "https://finalproject-efe7b-default-rtdb.firebaseio.com",
+    "project_id": "finalproject-efe7b",
+    "storage_bucket": "finalproject-efe7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510649194648:android:4703be0b65b4e117c7d8ed",
+        "android_client_info": {
+          "package_name": "edu.neu.ikigai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510649194648-5rdom8t64fqtaah8uu51bgsn34o3bfbm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFwDjlcahku_PKHpU9zHFKELo1AzgnlQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510649194648-5rdom8t64fqtaah8uu51bgsn34o3bfbm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
