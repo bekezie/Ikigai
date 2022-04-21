@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_username;
@@ -46,6 +47,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void  onStart() {
+        super.onStart();
+        FirebaseUser curruser = mAuth.getCurrentUser();
+        if (curruser != null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
 
     public void login() {
         String email = et_username.getText().toString();
@@ -63,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
                     }else{
-                        Toast.makeText(LoginActivity.this, "Login  Error",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Login  Error: "+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
                     }
                 }
             });
