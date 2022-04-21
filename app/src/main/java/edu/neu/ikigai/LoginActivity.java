@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //getToken();
                 login();
             }
         });
