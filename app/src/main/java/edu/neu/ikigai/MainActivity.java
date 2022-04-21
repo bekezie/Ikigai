@@ -101,13 +101,15 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean isValid = false;
                 for (DataSnapshot u : snapshot.getChildren()) {
+                    Log.d("TAG", u.toString() + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                     if (String.valueOf(u.getKey()).equalsIgnoreCase(et_username.getText().toString())) {
                         user = et_username.getText().toString();
                         //checks if token needs to be updated
                         updateToken(snapshot);
                         Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
                         isValid = true;
-                        getWorksheetSummary();
+                        getHomeScreenActivity();
+                        // getWorksheetSummary();
                     }
                 }
                 if (!isValid) {
@@ -188,7 +190,10 @@ public class MainActivity extends AppCompatActivity {
 //
 //    };
 
-
+    public void getHomeScreenActivity() {
+        Intent intent = new Intent(this, HomeScreen.class);
+        startActivity(intent);
+    }
 
     public void getWorksheetSummary() {
         Intent intent = new Intent(this, WorksheetSummary.class);
