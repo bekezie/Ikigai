@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean isValid = false;
                 for (DataSnapshot u : snapshot.getChildren()) {
-                    Log.d("TAG", u.toString() + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                     if (String.valueOf(u.getKey()).equalsIgnoreCase(et_username.getText().toString())) {
                         user = et_username.getText().toString();
                         //checks if token needs to be updated
@@ -138,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
 
                         mutableData.setValue(token);
 
-
                         return Transaction.success(mutableData);
                     }
 
@@ -171,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 //        public void Auth(DataSnapshot dataSnapshot) {
 //            Log.e(TAG,"key: "+ dataSnapshot.getKey());
