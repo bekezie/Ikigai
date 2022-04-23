@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ikigai">
         <activity
+            android:name=".WorksheetCreate"
+            android:exported="false" />
+        <activity
             android:name=".WorksheetThoughtActivity"
             android:exported="false" />
         <activity

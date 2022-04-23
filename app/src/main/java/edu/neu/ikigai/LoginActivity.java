@@ -35,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                register();
-
+//                register();
+                advancedToWorksheet();
             }
         });
         submitBtn.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +80,11 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void register(){
         Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    public void advancedToWorksheet() {
+        Intent intent = new Intent(this, WorksheetCreate.class);
         startActivity(intent);
     }
 }
