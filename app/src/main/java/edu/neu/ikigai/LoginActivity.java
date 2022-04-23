@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,16 +21,16 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
     private EditText et_username;
     private EditText et_password;
-    private Button registerBtn;
+    private TextView registerBtn;
     private Button submitBtn;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        registerBtn = (Button) findViewById(R.id.register);
+        registerBtn = (TextView) findViewById(R.id.register);
         submitBtn = (Button) findViewById(R.id.submit);
-        et_username = (EditText) findViewById(R.id.et_user);
+        et_username = (EditText) findViewById(R.id.et_email);
         et_password = (EditText) findViewById(R.id.et_password);
         mAuth = FirebaseAuth.getInstance();
         registerBtn.setOnClickListener(new View.OnClickListener() {
