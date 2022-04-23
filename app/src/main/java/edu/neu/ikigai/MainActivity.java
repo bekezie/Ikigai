@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     public Transaction.Result doTransaction(MutableData mutableData) {
 
                         String oldToken = mutableData.getValue(String.class);
+                        Log.d(TAG, "oldToken is: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + oldToken);
                         if (!oldToken.isEmpty()) {
                             return Transaction.success(mutableData);
                         }

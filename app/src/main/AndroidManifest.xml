@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ikigai">
         <activity
-            android:name=".HomeScreen"
-            android:exported="false" />
-        <activity
             android:name=".Profile"
             android:exported="false" />
         <activity
@@ -25,8 +22,12 @@
             android:name=".WorksheetSummary"
             android:exported="false" />
         <activity
+            android:name=".HomeScreen"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
