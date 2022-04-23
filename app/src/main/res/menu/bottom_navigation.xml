@@ -7,17 +7,17 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/nav_draw"
+        android:id="@+id/nav_entries"
         android:icon="@drawable/ic_baseline_draw_24"
         android:title="Entries" />
 
     <item
-        android:id="@+id/nav_run"
+        android:id="@+id/nav_exercise"
         android:icon="@drawable/ic_baseline_directions_run_24"
         android:title="Exercise" />
 
     <item
-        android:id="@+id/nav_search"
+        android:id="@+id/nav_more"
         android:icon="@drawable/ic_baseline_more_horiz_24"
         android:title="More" />
 
