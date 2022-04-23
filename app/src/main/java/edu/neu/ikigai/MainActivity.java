@@ -125,31 +125,30 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateToken(DataSnapshot dataSnapshot) {
         mDatabase.child("user")
-                .child(user)
-                .runTransaction(new Transaction.Handler() {
-                    @Override
-                    public Transaction.Result doTransaction(MutableData mutableData) {
+            .child(user)
+            .runTransaction(new Transaction.Handler() {
+                @Override
+                public Transaction.Result doTransaction(MutableData mutableData) {
 
-                        String oldToken = mutableData.getValue(String.class);
-                        Log.d(TAG, "oldToken is: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + oldToken);
-                        if (!oldToken.isEmpty()) {
-                            return Transaction.success(mutableData);
-                        }
-
-                        mutableData.setValue(token);
-
+                    String oldToken = mutableData.getValue(String.class);
+                    if (!oldToken.isEmpty()) {
                         return Transaction.success(mutableData);
                     }
 
-                    @Override
-                    public void onComplete(DatabaseError databaseError, boolean b,
-                                           DataSnapshot dataSnapshot) {
-                        // Transaction completed
-                        Log.d(TAG, "postTransaction:onComplete:" + databaseError);
-                        Toast.makeText(getApplicationContext()
-                                , "DBError: " + databaseError, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    mutableData.setValue(token);
+
+                    return Transaction.success(mutableData);
+                }
+
+                @Override
+                public void onComplete(DatabaseError databaseError, boolean b,
+                                       DataSnapshot dataSnapshot) {
+                    // Transaction completed
+                    Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+                    Toast.makeText(getApplicationContext()
+                            , "DBError: " + databaseError, Toast.LENGTH_SHORT).show();
+                }
+            });
     }
     public void getToken(){
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
@@ -199,8 +198,4 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
-
-
-
-
 }
