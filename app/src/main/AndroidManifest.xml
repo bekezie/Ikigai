@@ -22,7 +22,7 @@
             android:name=".WorksheetSummary"
             android:exported="false" />
         <activity
-            android:name=".HomeScreen"
+            android:name=".BottomNavigationBarFragments"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
