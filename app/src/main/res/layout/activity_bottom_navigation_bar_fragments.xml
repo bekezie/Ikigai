@@ -10,21 +10,23 @@
 
     <FrameLayout
         android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation"/>
+        android:layout_width="411dp"
+        android:layout_height="660dp"
+        android:layout_above="@id/bottom_navigation"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="125dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="?android:attr/windowBackground"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.997"
-        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation"
-        tools:layout_editor_absoluteX="0dp"
-        android:background="?android:attr/windowBackground"/>
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
