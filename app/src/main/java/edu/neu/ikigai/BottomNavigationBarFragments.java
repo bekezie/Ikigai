@@ -14,12 +14,12 @@ import edu.neu.ikigai.Fragments.ExerciseFragment;
 import edu.neu.ikigai.Fragments.HomeFragment;
 import edu.neu.ikigai.Fragments.MoreFragment;
 
-public class HomeScreen extends AppCompatActivity {
+public class BottomNavigationBarFragments extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.activity_bottom_navigation_bar_fragments);
 
         NavigationBarView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(navListener);
