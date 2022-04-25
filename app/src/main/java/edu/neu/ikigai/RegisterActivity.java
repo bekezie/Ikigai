@@ -21,6 +21,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import javax.security.auth.login.LoginException;
+
 import edu.neu.ikigai.models.User;
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -57,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToLogin();
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
         submitBtn.setOnClickListener(new View.OnClickListener() {
@@ -127,9 +130,9 @@ public class RegisterActivity extends AppCompatActivity {
                                     if(task.isSuccessful()){
                                         Toast.makeText(RegisterActivity.this, "Sign up successful", Toast.LENGTH_LONG).show();
                                         //progressBar.setVisibility(View.GONE);
-                                        goToLogin();
+                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     }else{
-                                        Toast.makeText(RegisterActivity.this, "Registration Error: "+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                        Toast.makeText(RegisterActivity.this, "Registration Database Error: "+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
                                         //progressBar.setVisibility(View.GONE);
                                     }
                                 }
@@ -221,13 +224,6 @@ public class RegisterActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
-
-    public void  goToLogin() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        //intent.putExtra("SENDER_USERNAME", user);
-
-        startActivity(intent);
-    }
 
 
 }
