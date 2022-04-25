@@ -20,7 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPassword extends AppCompatActivity {
     private EditText et_username;
-    private EditText et_password;
     private TextView resetBtn;
     private FirebaseAuth mAuth;
     @Override
@@ -29,7 +28,6 @@ public class ForgotPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
         resetBtn = (TextView) findViewById(R.id.submit);
         et_username = (EditText) findViewById(R.id.et_email);
-        et_password = (EditText) findViewById(R.id.et_password);
         mAuth = FirebaseAuth.getInstance();
 
         resetBtn.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +40,6 @@ public class ForgotPassword extends AppCompatActivity {
     }
     public void ResetPassword() {
         String email = et_username.getText().toString();
-        String password = et_password.getText().toString();
         if (TextUtils.isEmpty(email)) {
             et_username.setError("Email cannot be empty");
             return;
@@ -52,17 +49,14 @@ public class ForgotPassword extends AppCompatActivity {
             return;
 
         }
-        if (TextUtils.isEmpty(password)) {
-            et_password.setError("Password cannot be empty");
-            return;
-        }
         mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(ForgotPassword.this, "Check your email to reset your password", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(ForgotPassword.this, LoginActivity.class));
                 } else {
-                    Toast.makeText(ForgotPassword.this, "Try again! Something wrong happened!.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPassword.this, "Reset Password Error: "+ task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
