@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <!--Todo: make action/tool bar that has "WORKSHEET" and back button-->
+        <!--Todo: add border to bottom-->
+
+    <TextView
+        android:id="@+id/worksheetTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="WORKSHEET"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:layout_width="25dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/back"
+        app:layout_constraintEnd_toStartOf="@+id/worksheetTitle"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cognitiveDistortionsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Cognitive Distortions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/worksheetTitle"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/cognitiveDistortionsTitle">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <CheckBox
+            android:id="@+id/distortion_emotionalReasoning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Emotional Reasoning"
+            android:onClick="onDistortionClicked"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distortion_emotionalReasoning"
+                android:text="The conclusion that if you feel something then it must be true. Example: I don't feel like working. So I won't be able to get anything done."
+                android:layout_marginLeft="9dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:id="@+id/distortion_allOrNothingThinking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All or Nothing Thinking"
+                android:onClick="onDistortionClicked"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distortion_allOrNothingThinking"
+                android:text="Thinking in black or white terms. Example: This assignment isn't worth handing in unless I complete it perfectly."
+                android:layout_marginLeft="9dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:id="@+id/distortion_overgeneralizing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Overgeneralizing"
+                android:onClick="onDistortionClicked"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distortion_overgeneralizing"
+                android:text="Thinking that you will always fail at something if you fail at it once or a few times."
+                android:layout_marginLeft="9dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:id="@+id/distortion_mentalFiltering"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mental Filtering"
+                android:onClick="onDistortionClicked"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distortion_mentalFiltering"
+                android:layout_marginLeft="9dp"
+                android:text="Even when the positive outweighs the negative, you tend to focus on the negative and let it overshadow everything." />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:id="@+id/distortion_mindReading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jumping to Conclusions: Mind Reading"
+                android:onClick="onDistortionClicked"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distortion_mindReading"
+                android:layout_marginLeft="9dp"
+                android:text="Assuming you know how other people are thinking or feeling." />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:id="@+id/distortion_fortuneTelling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jumping to Conclusions: Fortune-Telling"
+                android:onClick="onDistortionClicked"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distortion_fortuneTelling"
+                android:layout_marginLeft="9dp"
+                android:text="Making strong predictions about the future. Example: Telling yourself that you'll never recover when you're in a depressive episode." />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:id="@+id/distortion_catastrophizingAndMinimizing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Catastrophizing and Minimizing"
+                android:onClick="onDistortionClicked"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distortion_catastrophizingAndMinimizing"
+                android:layout_marginLeft="9dp"
+                android:text="Blowing things our of proportion or shrinking their importance." />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:id="@+id/distortion_shouldStatements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Catastrophizing and Minimizing"
+                android:onClick="onDistortionClicked"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distortion_shouldStatements"
+                android:layout_marginLeft="9dp"
+                android:text="Blowing things our of proportion or shrinking their importance." />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
