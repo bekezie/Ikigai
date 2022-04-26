@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worksheet_distortions);
         et_username = (EditText) findViewById(R.id.et_user);
-        submitBtn = (Button) findViewById(R.id.submit);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getToken();
-                login();
-            }
-        });
+//        submitBtn = (Button) findViewById(R.id.submit);
+//        submitBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getToken();
+//                login();
+//            }
+//        });
     }
 
     public void login() {
