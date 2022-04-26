@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_worksheet_distortions);
+        setContentView(R.layout.activity_main);
         et_username = (EditText) findViewById(R.id.et_user);
 //        submitBtn = (Button) findViewById(R.id.submit);
 //        submitBtn.setOnClickListener(new View.OnClickListener() {
