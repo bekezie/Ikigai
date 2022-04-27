@@ -11,7 +11,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import edu.neu.ikigai.Fragments.EntriesFragment;
 import edu.neu.ikigai.Fragments.ExerciseFragment;
-import edu.neu.ikigai.Fragments.HomeFragment;
+import edu.neu.ikigai.Fragments.HomeNoSummaryFragment;
 import edu.neu.ikigai.Fragments.MoreFragment;
 
 public class BottomNavigationBarFragments extends AppCompatActivity {
@@ -26,7 +26,7 @@ public class BottomNavigationBarFragments extends AppCompatActivity {
 
         // Shows the home screen once the user has successfully logged in.
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
+                new HomeNoSummaryFragment()).commit();
     }
 
     private NavigationBarView.OnItemSelectedListener navListener =
@@ -37,7 +37,7 @@ public class BottomNavigationBarFragments extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.nav_home:     // Home Fragment
-                        selectedFragment = new HomeFragment();
+                        selectedFragment = new HomeNoSummaryFragment();
                         break;
                     case R.id.nav_entries:  // Entries Fragment
                         selectedFragment = new EntriesFragment();
