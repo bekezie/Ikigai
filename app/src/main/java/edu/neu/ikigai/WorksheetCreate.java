@@ -17,6 +17,7 @@ import edu.neu.ikigai.models.WorkSheet;
 public class WorksheetCreate extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private Button addEventBtn;
+    private Button addThoughtBtn;
     private String worksheetId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +42,27 @@ public class WorksheetCreate extends AppCompatActivity {
             }
         });
 
+        addThoughtBtn = (Button) findViewById(R.id.addThoughtButton);
+
+        addThoughtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                advanceToActivity("thought");
+            }
+        });
+
     }
 
     public void advanceToActivity(String act) {
         switch (act) {
             case ("event"):
-                Intent intent = new Intent(this, WorksheetEventActivity.class);
-                intent.putExtra("worksheetId", worksheetId);
-                startActivity(intent);
+                Intent intentEvent = new Intent(this, WorksheetEventActivity.class);
+                intentEvent.putExtra("worksheetId", worksheetId);
+                startActivity(intentEvent);
+            case ("thought"):
+                Intent intentThought = new Intent(this, WorksheetThoughtActivity.class);
+                intentThought.putExtra("worksheetId", worksheetId);
+                startActivity(intentThought);
         }
     }
 }
