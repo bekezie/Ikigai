@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.neu.ikigai.models.AutomaticThought;
-import edu.neu.ikigai.models.TriggeringEvent;
 
 public class WorksheetThoughtActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
@@ -59,6 +58,9 @@ public class WorksheetThoughtActivity extends AppCompatActivity {
     }
 
     public void next() {
-        // TODO
+        // TODO: temporarily going straight to distortions instead of emotions
+        Intent intent = new Intent(this, WorksheetDistortionsActivity.class);
+        intent.putExtra("worksheetId", worksheetId);
+        startActivity(intent);
     }
 }

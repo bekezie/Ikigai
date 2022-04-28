@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class WorksheetDistortions extends AppCompatActivity {
+public class WorksheetDistortionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
