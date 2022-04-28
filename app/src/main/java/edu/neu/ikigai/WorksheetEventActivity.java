@@ -64,6 +64,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
     }
 
     public void next() {
+        //Todo: next button should call save before going to next activity
         Intent intent = new Intent(this, WorksheetThoughtActivity.class);
         intent.putExtra("worksheetId", worksheetId);
         startActivity(intent);

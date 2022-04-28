@@ -45,8 +45,10 @@ public class WorksheetCreate extends AppCompatActivity {
 
     public void advanceToActivity(String act) {
         switch (act) {
+            // Todo: change back to WorksheetEventActivity.class
+            //  WorksheetDistortionsActivity just for testing purposes
             case ("event"):
-                Intent intent = new Intent(this, WorksheetEventActivity.class);
+                Intent intent = new Intent(this, WorksheetDistortionsActivity.class);
                 intent.putExtra("worksheetId", worksheetId);
                 startActivity(intent);
         }
