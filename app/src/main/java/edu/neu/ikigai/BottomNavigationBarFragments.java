@@ -24,6 +24,10 @@ public class BottomNavigationBarFragments extends AppCompatActivity {
         NavigationBarView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(navListener);
 
+        // TODO: Query Firebase to see if the user has already created an entry for the current date:
+        // 1) If the user has not created an entry, show the home screen with no summary.
+        // 2) If the user has created an entry, show the home screen with summary.
+
         // Shows the home screen once the user has successfully logged in.
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeNoSummaryFragment()).commit();
