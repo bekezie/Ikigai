@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 import edu.neu.ikigai.R;
 
-class HomeSummaryFragment extends Fragment {
+public class HomeSummaryFragment extends Fragment {
 
     @Nullable
     @Override
