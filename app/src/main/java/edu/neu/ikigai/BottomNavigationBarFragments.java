@@ -28,6 +28,7 @@ import edu.neu.ikigai.Fragments.MoreFragment;
 
 public class BottomNavigationBarFragments extends AppCompatActivity {
     private DatabaseReference mDatabase;
+    private Fragment mHomeScreen = new HomeNoSummaryFragment();
     private String user = "austin"; // HARDCODED @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     private NavigationBarView.OnItemSelectedListener navListener =
@@ -38,7 +39,7 @@ public class BottomNavigationBarFragments extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.nav_home:     // Home Fragment
-                        selectedFragment = new HomeNoSummaryFragment();
+                        selectedFragment = mHomeScreen;
                         break;
                     case R.id.nav_entries:  // Entries Fragment
                         selectedFragment = new EntriesFragment();
@@ -95,10 +96,12 @@ public class BottomNavigationBarFragments extends AppCompatActivity {
                 // which depends on whether or not the user has created an entry for today
                 if (!hasAlreadyCreatedAnEntryForToday) {
                     // The user has not created an entry for today.
+                    mHomeScreen = new HomeNoSummaryFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeNoSummaryFragment()).commit();
                 }
                 else if (hasAlreadyCreatedAnEntryForToday) {
                     // The user has created an entry for today.
+                    mHomeScreen = new HomeSummaryFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeSummaryFragment()).commit();
                 }
             }
