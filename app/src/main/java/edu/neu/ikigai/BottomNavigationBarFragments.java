@@ -97,12 +97,16 @@ public class BottomNavigationBarFragments extends AppCompatActivity {
                 if (!hasAlreadyCreatedAnEntryForToday) {
                     // The user has not created an entry for today.
                     mHomeScreen = new HomeNoSummaryFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeNoSummaryFragment()).commit();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, new HomeNoSummaryFragment()).commit();
                 }
                 else if (hasAlreadyCreatedAnEntryForToday) {
                     // The user has created an entry for today.
                     mHomeScreen = new HomeSummaryFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeSummaryFragment()).commit();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, new HomeSummaryFragment()).commit();
                 }
             }
 
