@@ -39,9 +39,12 @@
         app:layout_constraintTop_toBottomOf="@+id/worksheetTitle" />
 
     <ScrollView
+        android:id="@+id/distortionScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/cognitiveDistortionsTitle">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/distortionNextButton"
+        app:layout_constraintTop_toBottomOf="@+id/cognitiveDistortionsTitle"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -192,18 +195,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onDistortionClicked"
-                    android:text="Catastrophizing and Minimizing" />
+                    android:text="Should Statements" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/distortion_shouldStatements"
                     android:layout_marginLeft="9dp"
-                    android:text="Blowing things our of proportion or shrinking their importance." />
+                    android:text="Using language like I should and I must instead of it would be good if I did x or y." />
             </RelativeLayout>
+
         </LinearLayout>
+
+
     </ScrollView>
 
+    <Button
+        android:id="@+id/distortionSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/distortionNextButton"
+        android:onclick="onDistortionSave"
+        />
 
+    <Button
+        android:id="@+id/distortionNextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onclick="onDistortionNext"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
