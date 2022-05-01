@@ -1,5 +1,7 @@
 package edu.neu.ikigai.Fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,9 +30,12 @@ public class EntriesFragment extends Fragment {
     private String user = "austin"; // HARDCODED @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private DatabaseReference mDatabase;
 
+    // protected FragmentActivity mActivity;
+
     @Nullable
     // @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         String key = "-N0wZ7olzZ2lP42l6JNK";
         long timestamp = decode(key);
 
@@ -64,9 +69,14 @@ public class EntriesFragment extends Fragment {
                     }
                 }
 
-                getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new EntriesFragment()).commit();
+                /**
+                 * NULLPOINTEREXCEPTION()
+                 * getActivity() returns null! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                 * NOT SURE IF I EVEN NEED THIS THOUGH
+                 */
+                // getActivity().getSupportFragmentManager()
+                //     .beginTransaction()
+                //     .replace(R.id.fragment_container, new EntriesFragment()).commit();
             }
 
             @Override
