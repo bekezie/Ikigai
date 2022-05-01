@@ -8,12 +8,8 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -37,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void getHomeScreenActivity() {
+        Intent intent = new Intent(this, BottomNavigationBarFragments.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void  onStart() {
         super.onStart();
@@ -45,13 +46,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
-    }
-
-
-
-
-
-
 
 
 
