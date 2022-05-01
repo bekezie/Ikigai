@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.neu.ikigai">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,8 +28,12 @@
             android:name=".WorksheetSummary"
             android:exported="false" />
         <activity
+            android:name=".BottomNavigationBarFragments"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,5 +41,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
