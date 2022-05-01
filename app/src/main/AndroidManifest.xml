@@ -24,6 +24,9 @@
             android:name=".WorksheetDistortionsActivity"
             android:exported="false" />
         <activity
+            android:name=".WorksheetReasonableThoughtActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity

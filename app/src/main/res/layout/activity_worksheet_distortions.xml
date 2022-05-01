@@ -218,7 +218,7 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/distortionNextButton"
-        android:onclick="onDistortionSave"
+        android:onClick="onDistortionSave"
         />
 
     <Button
@@ -229,7 +229,7 @@
         android:layout_marginEnd="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onclick="onDistortionNext"
+        android:onClick="onDistortionNext"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

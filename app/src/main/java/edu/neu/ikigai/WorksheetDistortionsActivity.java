@@ -1,5 +1,6 @@
 package edu.neu.ikigai;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -30,9 +31,12 @@ public class WorksheetDistortionsActivity extends AppCompatActivity {
         // Todo: populate array list with data from database
         //  or create a new array list
         //  set checked to true for checked boxes when saved data is being used
+
+        // Todo: store actual checkboxes so you can activate and deactivate them whenever onCreate called
         distortions = new ArrayList<>();
     }
 
+    //Todo: perhaps set onClick listener to avoid passing view unnecessarily
     public void onDistortionClicked(View view) {
         CheckBox checkbox= (CheckBox) view;
         boolean checked = checkbox.isChecked();
@@ -43,11 +47,17 @@ public class WorksheetDistortionsActivity extends AppCompatActivity {
             distortions.remove(name);
     }
 
-    public void onDistortionSave() {
+    public void onDistortionSave(View view) {
         Map<String, Object> map = new HashMap<>();
         map.put("distortions", distortions);
-        mDatabase.child("user").child("minh").child(worksheetId).updateChildren(map);
+        mDatabase.child("worksheet").child("austin").child(worksheetId).updateChildren(map);
     }
 
+    public void onDistortionNext(View view) {
+        onDistortionSave(view);
+        Intent intent = new Intent(this, WorksheetReasonableThoughtActivity.class);
+        intent.putExtra("worksheetId", worksheetId);
+        startActivity(intent);
+    }
 
 }
