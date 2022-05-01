@@ -66,7 +66,7 @@ public class EntriesFragment extends Fragment {
 
                 getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new HomeSummaryFragment()).commit();
+                    .replace(R.id.fragment_container, new EntriesFragment()).commit();
             }
 
             @Override

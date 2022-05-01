@@ -63,7 +63,7 @@
             android:layout_width="334dp"
             android:layout_height="100dp"
             android:layout_marginTop="60dp"
-            android:text="This will be the Entries screen.."
+            android:text="This will be the Entries screen. It will show a history of all the entries the user has made."
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/triggering_event"
             app:layout_constraintEnd_toEndOf="parent"
