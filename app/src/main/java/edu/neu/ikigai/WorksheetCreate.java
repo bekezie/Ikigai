@@ -17,6 +17,7 @@ import edu.neu.ikigai.models.WorkSheet;
 public class WorksheetCreate extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private Button addEventBtn;
+    private Button addThoughtBtn;
     private String worksheetId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +26,12 @@ public class WorksheetCreate extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        worksheetId = mDatabase.child("user").child("minh").push().getKey();
+        worksheetId = mDatabase.child("worksheet").child("minh").push().getKey();
         WorkSheet ws = new WorkSheet();
         ws.setEvent(new TriggeringEvent("","", ""));
         ws.setThought(new AutomaticThought("", ""));
 
-        mDatabase.child("user").child("minh").child(worksheetId).setValue(ws);
+        mDatabase.child("worksheet").child("minh").child(worksheetId).setValue(ws);
 
         addEventBtn = (Button) findViewById(R.id.addEventButton);
 
@@ -41,16 +42,32 @@ public class WorksheetCreate extends AppCompatActivity {
             }
         });
 
+        addThoughtBtn = (Button) findViewById(R.id.addThoughtButton);
+
+        addThoughtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                advanceToActivity("thought");
+            }
+        });
+
     }
 
     public void advanceToActivity(String act) {
         switch (act) {
-            // Todo: change back to WorksheetEventActivity.class
-            //  WorksheetDistortionsActivity just for testing purposes
             case ("event"):
-                Intent intent = new Intent(this, WorksheetDistortionsActivity.class);
-                intent.putExtra("worksheetId", worksheetId);
-                startActivity(intent);
+                Intent intentEvent = new Intent(this, WorksheetEventActivity.class);
+                intentEvent.putExtra("worksheetId", worksheetId);
+                startActivity(intentEvent);
+                break;
+            case ("thought"):
+                Intent intentThought = new Intent(this, WorksheetThoughtActivity.class);
+                intentThought.putExtra("worksheetId", worksheetId);
+                startActivity(intentThought);
+                break;
+
+            default:
+                break;
         }
     }
 }

@@ -7,6 +7,26 @@
     tools:context=".WorksheetCreate">
 
     <Button
+        android:id="@+id/addThoughtButton"
+        android:layout_width="52dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:text="+"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEventButton" />
+
+    <TextView
+        android:id="@+id/addThoughttextView"
+        android:layout_width="92dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
+        android:text="Add thoughts"
+        app:layout_constraintStart_toEndOf="@+id/addThoughtButton"
+        app:layout_constraintTop_toBottomOf="@+id/addEventtextView" />
+
+    <Button
         android:id="@+id/addEventButton"
         android:layout_width="52dp"
         android:layout_height="49dp"
