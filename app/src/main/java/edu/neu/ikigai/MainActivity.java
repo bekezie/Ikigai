@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et_username.setText("austin");
                 getToken();
                 login();
             }
