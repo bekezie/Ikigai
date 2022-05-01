@@ -29,12 +29,12 @@ public class WorksheetCreate extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        worksheetId = mDatabase.child("userTest").child(mAuth.getCurrentUser().getUid()).push().getKey();
+        worksheetId = mDatabase.child("user").child(mAuth.getCurrentUser().getUid()).push().getKey();
         WorkSheet ws = new WorkSheet();
         ws.setEvent(new TriggeringEvent("","", ""));
         ws.setThought(new AutomaticThought("", ""));
 
-        mDatabase.child("user").child("minh").child(worksheetId).setValue(ws);
+        mDatabase.child("user").child(mAuth.getCurrentUser().getUid()).child(worksheetId).setValue(ws);
 
         addEventBtn = (Button) findViewById(R.id.addEventButton);
 

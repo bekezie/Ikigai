@@ -126,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
                     //User user = new User(fullName, email)
 
 
-                    mDatabase.child("userTest").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue("")
+                    mDatabase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue("")
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
