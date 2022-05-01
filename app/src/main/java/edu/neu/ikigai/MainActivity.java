@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                et_username.setText("austin");
                 getToken();
                 login();
             }
@@ -102,7 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 boolean isValid = false;
                 for (DataSnapshot u : snapshot.getChildren()) {
                     if (String.valueOf(u.getKey()).equalsIgnoreCase(et_username.getText().toString())) {
+
                         user = et_username.getText().toString();
+
                         //checks if token needs to be updated
                         updateToken(snapshot);
                         Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 //    };
 
     public void getHomeScreenActivity() {
-        Intent intent = new Intent(this, HomeScreen.class);
+        Intent intent = new Intent(this, BottomNavigationBarFragments.class);
         startActivity(intent);
     }
 
