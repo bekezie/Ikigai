@@ -22,21 +22,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import javax.security.auth.login.LoginException;
-
-import edu.neu.ikigai.models.User;
+import edu.neu.ikigai.models.AutomaticThought;
+import edu.neu.ikigai.models.TriggeringEvent;
+import edu.neu.ikigai.models.WorkSheet;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private Button submitBtn;
     private TextView loginBtn;
-    private EditText et_fullName;
+    //private EditText et_fullName;
     private EditText et_email;
     private EditText et_password;
     private EditText et_confirmedPass;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private String worksheetId;
     private String token;
     private String user;
 
@@ -75,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void register() {
         // Connect with firebase
-        String fullName = et_fullName.getText().toString();
+        //String fullName = et_fullName.getText().toString();
         String password = et_password.getText().toString();
         String confirmedPassword = et_confirmedPass.getText().toString();
         String email = et_email.getText().toString();
@@ -122,13 +123,15 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    //User user = new User(fullName, email);
-                    mDatabase.child("userTest").child(email)
-                            .setValue("")
+                    //User user = new User(fullName, email)
+
+
+                    mDatabase.child("userTest").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue("")
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
+
                                         Toast.makeText(RegisterActivity.this, "Sign up successful", Toast.LENGTH_LONG).show();
                                         //progressBar.setVisibility(View.GONE);
                                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
