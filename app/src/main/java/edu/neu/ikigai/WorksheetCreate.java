@@ -26,12 +26,12 @@ public class WorksheetCreate extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        worksheetId = mDatabase.child("user").child("minh").push().getKey();
+        worksheetId = mDatabase.child("worksheet").child("minh").push().getKey();
         WorkSheet ws = new WorkSheet();
         ws.setEvent(new TriggeringEvent("","", ""));
         ws.setThought(new AutomaticThought("", ""));
 
-        mDatabase.child("user").child("minh").child(worksheetId).setValue(ws);
+        mDatabase.child("worksheet").child("minh").child(worksheetId).setValue(ws);
 
         addEventBtn = (Button) findViewById(R.id.addEventButton);
 
@@ -59,10 +59,15 @@ public class WorksheetCreate extends AppCompatActivity {
                 Intent intentEvent = new Intent(this, WorksheetEventActivity.class);
                 intentEvent.putExtra("worksheetId", worksheetId);
                 startActivity(intentEvent);
+                break;
             case ("thought"):
                 Intent intentThought = new Intent(this, WorksheetThoughtActivity.class);
                 intentThought.putExtra("worksheetId", worksheetId);
                 startActivity(intentThought);
+                break;
+
+            default:
+                break;
         }
     }
 }

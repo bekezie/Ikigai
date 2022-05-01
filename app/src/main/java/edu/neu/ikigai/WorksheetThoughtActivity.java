@@ -55,7 +55,7 @@ public class WorksheetThoughtActivity extends AppCompatActivity {
         AutomaticThought thought = new AutomaticThought(thoughtEt.getText().toString(), journalEt.getText().toString());
         Map<String, Object> map = new HashMap<String,Object>();
         map.put("thought", thought);
-        mDatabase.child("user").child("minh").child(worksheetId).updateChildren(map);
+        mDatabase.child("worksheet").child("minh").child(worksheetId).updateChildren(map);
     }
 
     public void next() {
