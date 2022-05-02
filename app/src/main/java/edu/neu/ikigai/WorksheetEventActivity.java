@@ -16,6 +16,14 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.*;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +52,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
     private Button saveButton;
     private String worksheetId;
     private TextView locationName;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +70,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
         nextButton = (Button) findViewById(R.id.eventNextButton);
         saveButton = (Button) findViewById(R.id.eventSaveButton);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +85,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
                 next();
             }
         });
+
         locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,15 +94,24 @@ public class WorksheetEventActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void  onStart() {
+        super.onStart();
+        FirebaseUser curruser = mAuth.getCurrentUser();
+        if (curruser == null) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
     public void save() {
         TriggeringEvent event = new TriggeringEvent(eventEt.getText().toString(), journalEt.getText().toString(), "123" );
         Map<String, Object> map = new HashMap<String,Object>();
         map.put("event", event);
-        mDatabase.child("worksheet").child("minh").child(worksheetId).updateChildren(map);
+        mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
     }
 
     public void next() {
-        //Todo: next button should call save before going to next activity
         Intent intent = new Intent(this, WorksheetThoughtActivity.class);
         intent.putExtra("worksheetId", worksheetId);
         startActivity(intent);

@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,25 +22,36 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
     private EditText et_username;
     private EditText et_password;
-    private Button registerBtn;
+    private TextView registerBtn;
+    private TextView forgotPassword;
     private Button submitBtn;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        registerBtn = (Button) findViewById(R.id.register);
+        registerBtn = (TextView) findViewById(R.id.register);
         submitBtn = (Button) findViewById(R.id.submit);
-        et_username = (EditText) findViewById(R.id.et_user);
+        et_username = (EditText) findViewById(R.id.et_email);
         et_password = (EditText) findViewById(R.id.et_password);
+        forgotPassword = (TextView) findViewById(R.id.forgot);
         mAuth = FirebaseAuth.getInstance();
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                register();
-                advancedToWorksheet();
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+
             }
         });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
+            }
+        });
+
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,13 +59,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
     @Override
     protected void  onStart() {
         super.onStart();
         FirebaseUser curruser = mAuth.getCurrentUser();
         if (curruser != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }
     }
 
@@ -61,26 +75,29 @@ public class LoginActivity extends AppCompatActivity {
         String password = et_password.getText().toString();
         if (TextUtils.isEmpty(email)) {
             et_username.setError("Email cannot be empty");
-        } else if (TextUtils.isEmpty(password)) {
-            et_password.setError("Password cannot be empty");
-        } else {
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this, "Login Successful",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
-                    }else{
-                        Toast.makeText(LoginActivity.this, "Login  Error: "+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+            return;
         }
-    }
-    public void register(){
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            et_username.setError("Please provide valid email!");
+            return;
+
+        }
+        if (TextUtils.isEmpty(password)) {
+            et_password.setError("Password cannot be empty");
+            return;
+        }
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(LoginActivity.this, "Login Successful",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                }else{
+                    Toast.makeText(LoginActivity.this, "Login  Error: "+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     public void advancedToWorksheet() {
