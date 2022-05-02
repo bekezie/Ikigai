@@ -68,12 +68,13 @@ public class WorksheetThoughtActivity extends AppCompatActivity {
         AutomaticThought thought = new AutomaticThought(thoughtEt.getText().toString(), journalEt.getText().toString());
         Map<String, Object> map = new HashMap<String,Object>();
         map.put("thought", thought);
-        mDatabase.child("user").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
+        mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
     }
 
     public void next() {
-        // TODO
+        // TODO: temporarily going straight to distortions instead of emotions
+        Intent intent = new Intent(this, WorksheetDistortionsActivity.class);
+        intent.putExtra("worksheetId", worksheetId);
+        startActivity(intent);
     }
-
 }
-

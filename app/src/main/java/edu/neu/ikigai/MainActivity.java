@@ -77,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void getHomeScreenActivity() {
+        Intent intent = new Intent(this, BottomNavigationBarFragments.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void  onStart() {
         super.onStart();
@@ -86,12 +91,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-
-
-
-
-
 
 
 

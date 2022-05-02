@@ -3,6 +3,10 @@
     package="edu.neu.ikigai">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,13 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ikigai">
         <activity
+            android:name=".WorksheetCreate"
+            android:exported="false" />
+        <activity
             android:name=".WorksheetThoughtActivity"
             android:exported="false" />
         <activity
             android:name=".WorksheetEventActivity"
             android:exported="false" />
         <activity
-            android:name=".WorksheetCreate"
+            android:name=".WorksheetDistortionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WorksheetReasonableThoughtActivity"
             android:exported="false" />
         <activity
             android:name=".ForgotPassword"
@@ -44,6 +54,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
