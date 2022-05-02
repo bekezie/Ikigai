@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_confirmedPass = (EditText) findViewById(R.id.et_confirmed);
         loginBtn = (TextView) findViewById(R.id.login);
         submitBtn = (Button) findViewById(R.id.submit);
-        //progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        //progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -133,11 +133,11 @@ public class RegisterActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
 
                                         Toast.makeText(RegisterActivity.this, "Sign up successful", Toast.LENGTH_LONG).show();
-                                        //progressBar.setVisibility(View.GONE);
+                                        progressBar.setVisibility(View.GONE);
                                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     } else {
                                         Toast.makeText(RegisterActivity.this, "Registration Database Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                        //progressBar.setVisibility(View.GONE);
+                                        progressBar.setVisibility(View.GONE);
                                     }
                                 }
                             });
@@ -145,6 +145,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(RegisterActivity.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     Log.e(TAG, task.getException().getMessage());
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });

@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView forgotPassword;
     private Button submitBtn;
     private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         et_username = (EditText) findViewById(R.id.et_email);
         et_password = (EditText) findViewById(R.id.et_password);
         forgotPassword = (TextView) findViewById(R.id.forgot);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mAuth = FirebaseAuth.getInstance();
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,15 +90,18 @@ public class LoginActivity extends AppCompatActivity {
             et_password.setError("Password cannot be empty");
             return;
         }
+        progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(LoginActivity.this, "Login Successful",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    progressBar.setVisibility(View.GONE);
 
                 }else{
                     Toast.makeText(LoginActivity.this, "Login  Error: "+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
