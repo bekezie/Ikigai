@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -24,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView worksheetevent;
     private TextView worksheetThought;
     private TextView profile;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,13 +74,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void getHomeScreenActivity() {
-        Intent intent = new Intent(this, BottomNavigationBarFragments.class);
-        startActivity(intent);
-    }
-
     @Override
-    protected void  onStart() {
+    protected void onStart() {
         super.onStart();
         FirebaseUser curruser = mAuth.getCurrentUser();
         if (curruser == null) {
@@ -91,8 +83,4 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-
-
-
 }
