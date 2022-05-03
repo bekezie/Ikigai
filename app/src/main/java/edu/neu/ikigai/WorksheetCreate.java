@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import edu.neu.ikigai.models.AutomaticThought;
+import edu.neu.ikigai.models.Thought;
 import edu.neu.ikigai.models.TriggeringEvent;
 import edu.neu.ikigai.models.WorkSheet;
 
@@ -29,12 +29,12 @@ public class WorksheetCreate extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        worksheetId = mDatabase.child("user").child(mAuth.getCurrentUser().getUid()).push().getKey();
+        worksheetId = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).push().getKey();
         WorkSheet ws = new WorkSheet();
         ws.setEvent(new TriggeringEvent("","", ""));
-        ws.setThought(new AutomaticThought("", ""));
+        ws.setThought(new Thought("", ""));
 
-        mDatabase.child("user").child(mAuth.getCurrentUser().getUid()).child(worksheetId).setValue(ws);
+        mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).setValue(ws);
 
         addEventBtn = (Button) findViewById(R.id.addEventButton);
 

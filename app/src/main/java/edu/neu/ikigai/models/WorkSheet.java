@@ -2,11 +2,11 @@ package edu.neu.ikigai.models;
 
 public class WorkSheet {
     private TriggeringEvent event;
-    private AutomaticThought thought;
+    private Thought thought;
     private Distortion distortions;
 
     public WorkSheet() { }
-    public WorkSheet(TriggeringEvent event, AutomaticThought thought, Distortion distortions) {
+    public WorkSheet(TriggeringEvent event, Thought thought, Distortion distortions) {
         this.event = event;
         this.thought = thought;
         this.distortions = distortions;
@@ -20,11 +20,11 @@ public class WorkSheet {
         this.event = event;
     }
 
-    public AutomaticThought getThought() {
+    public Thought getThought() {
         return thought;
     }
 
-    public void setThought(AutomaticThought thought) {
+    public void setThought(Thought thought) {
         this.thought = thought;
     }
 

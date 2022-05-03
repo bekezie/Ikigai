@@ -16,8 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.neu.ikigai.models.AutomaticThought;
-import edu.neu.ikigai.models.TriggeringEvent;
+import edu.neu.ikigai.models.Thought;
 
 public class WorksheetThoughtActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
@@ -54,6 +53,8 @@ public class WorksheetThoughtActivity extends AppCompatActivity {
             }
         });
     }
+
+    //Todo: what does this do?
     @Override
     protected void  onStart() {
         super.onStart();
@@ -65,9 +66,9 @@ public class WorksheetThoughtActivity extends AppCompatActivity {
     }
 
     public void save() {
-        AutomaticThought thought = new AutomaticThought(thoughtEt.getText().toString(), journalEt.getText().toString());
+        Thought thought = new Thought(thoughtEt.getText().toString(), journalEt.getText().toString());
         Map<String, Object> map = new HashMap<String,Object>();
-        map.put("thought", thought);
+        map.put("autoThought", thought);
         mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
     }
 

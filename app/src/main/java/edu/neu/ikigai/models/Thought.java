@@ -1,10 +1,10 @@
 package edu.neu.ikigai.models;
 
-public class AutomaticThought {
+public class Thought {
     private String thought;
     private String journal;
 
-    public AutomaticThought(String thought, String journal) {
+    public Thought(String thought, String journal) {
         this.thought = thought;
         this.journal = journal;
     }
