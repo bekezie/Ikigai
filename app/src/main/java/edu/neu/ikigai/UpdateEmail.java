@@ -72,7 +72,7 @@ public class UpdateEmail extends AppCompatActivity {
 
 
         if (TextUtils.isEmpty(newEmail)) {
-            et_email.setError("Email cannot be empty!");
+            et_newEmail.setError("Email cannot be empty!");
             return;
 
         }
