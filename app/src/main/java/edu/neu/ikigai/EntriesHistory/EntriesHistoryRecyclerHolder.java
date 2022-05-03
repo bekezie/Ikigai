@@ -10,12 +10,12 @@ import edu.neu.ikigai.R;
 
 public class EntriesHistoryRecyclerHolder extends RecyclerView.ViewHolder {
 
-    public TextView title;
-    public TextView user_input;
+    public TextView worksheetEntryDate;
+    public TextView worksheetEntryNumber;
 
     public EntriesHistoryRecyclerHolder(View entryCardView) {
         super(entryCardView);
-        title = entryCardView.findViewById(R.id.title_textview);
-        user_input = entryCardView.findViewById(R.id.user_input_textview);
+        worksheetEntryDate = entryCardView.findViewById(R.id.worksheet_entry_date);
+        worksheetEntryNumber = entryCardView.findViewById(R.id.worksheet_entry_number);
     }
 }

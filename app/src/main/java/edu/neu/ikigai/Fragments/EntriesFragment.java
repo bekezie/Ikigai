@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,59 +23,75 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import edu.neu.ikigai.EntriesHistory.EntriesHistoryRecyclerAdapter;
+import edu.neu.ikigai.EntriesHistory.EntryItem;
 import edu.neu.ikigai.R;
 
 public class EntriesFragment extends Fragment {
 
-    private String user = "austin"; // HARDCODED @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    private View view;
+
     private DatabaseReference mDatabase;
 
-    // protected FragmentActivity mActivity;
+    // RecyclerView and RecyclerAdapter
+    private RecyclerView mRecyclerView;
+    private EntriesHistoryRecyclerAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    ArrayList<EntryItem> entriesHistoryList = new ArrayList<EntryItem>();
+
+    private String user = "austin"; // HARDCODED @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     @Nullable
     // @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        String key = "-N0wZ7olzZ2lP42l6JNK";
-        long timestamp = decode(key);
-
-        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-        Date date = new Date(timestamp);
-        String test = dateFormat.format(date);
-        Log.d("date:", date.toString() + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        Log.d("test", test + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        view = inflater.inflate(R.layout.fragment_entries, container, false);
+        entriesHistoryList = new ArrayList<>();
+        entriesHistoryList.add(new EntryItem("5-3-2022", "Worksheet 1"));
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        // Searches the 'history' branch in the database
-        mDatabase.child("history").addListenerForSingleValueEvent(new ValueEventListener() {
+        buildRecyclerView();
+        Log.d("DEBUG", "CALLED BUILDRECYCLERVIEW @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+        // Searches the 'worksheet' branch in the database
+        mDatabase.child("worksheet").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 // Searches for the user in the 'history' branch
-                for (DataSnapshot history_user : snapshot.getChildren()) {
+                for (DataSnapshot worksheet_user : snapshot.getChildren()) {
                     // if the user in the 'history' branch is found
-                    if (String.valueOf(history_user.getKey()).equalsIgnoreCase(user)) {
+                    if (String.valueOf(worksheet_user.getKey()).equalsIgnoreCase(user)) { // HARDCODED USER @@@@@@@@@@@@@@@@@
 
-                        // Searches for today's date inside the 'history/user' branch
-                        for (DataSnapshot history_user_date : history_user.getChildren()) {
+                        int worksheetNumber = 1;
 
-                            // if today's date is found inside the 'history/user' branch
-                            if (String.valueOf(history_user_date.getKey()).equals(getDate())) {
+                        // Searches for the keys inside the 'worksheet/user' branch path
+                        for (DataSnapshot worksheet_user_firebase_key : worksheet_user.getChildren()) {
 
-                                break;
-                            }
+                            // Log.d("KEY FOUND: ", worksheet_user_firebase_key.getKey());
+                            long timestamp = decode(worksheet_user_firebase_key.getKey());
+
+                            DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                            String date = dateFormat.format(new Date(timestamp));
+                            // Log.d("date:", date);
+
+                            String worksheetID = "Worksheet " + worksheetNumber;
+                            entriesHistoryList.add(new EntryItem(date, worksheetID));
+                            worksheetNumber++;
                         }
                     }
                 }
 
-                /**
-                 * NULLPOINTEREXCEPTION()
-                 * getActivity() returns null! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                 * NOT SURE IF I EVEN NEED THIS THOUGH
-                 */
+                buildRecyclerView();
+
+                // NullPointerException:
+                // getActivity() returns null, but I am not sure if I will need this though.
+                //
                 // getActivity().getSupportFragmentManager()
                 //     .beginTransaction()
                 //     .replace(R.id.fragment_container, new EntriesFragment()).commit();
@@ -86,6 +104,27 @@ public class EntriesFragment extends Fragment {
         });
 
         return inflater.inflate(R.layout.fragment_entries, container, false);
+    }
+
+    public void buildRecyclerView() {
+        // RecyclerView and Adapter
+        mRecyclerView = view.findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        // mLayoutManager = new LinearLayoutManager(this.getContext());
+        mAdapter = new EntriesHistoryRecyclerAdapter(entriesHistoryList);
+
+        /**
+         * TODO:
+         * THIS IS WHERE YOU'LL SET FUNCTIONALITY FOR CLICKING EACH OF THE ENTRY CARDS
+         */
+//        mAdapter.setOnLinkClickListener(new EntriesHistoryRecyclerAdapter.OnLinkClickListener() {
+//            @Override
+//            public void onLinkClick(int position) {
+//                // changeItem(position, "Clicked");
+//            }
+//        });
+        // mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     public long decode(String id) {
