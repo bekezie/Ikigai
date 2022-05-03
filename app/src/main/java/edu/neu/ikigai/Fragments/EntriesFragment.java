@@ -46,17 +46,13 @@ public class EntriesFragment extends Fragment {
     private String user = "austin"; // HARDCODED @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     @Nullable
-    // @Override
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_entries, container, false);
         entriesHistoryList = new ArrayList<>();
-        entriesHistoryList.add(new EntryItem("5-3-2022", "Worksheet 1"));
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        buildRecyclerView();
-        Log.d("DEBUG", "CALLED BUILDRECYCLERVIEW @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
         // Searches the 'worksheet' branch in the database
         mDatabase.child("worksheet").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -78,23 +74,17 @@ public class EntriesFragment extends Fragment {
 
                             DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
                             String date = dateFormat.format(new Date(timestamp));
-                            // Log.d("date:", date);
+                            Log.d("date:", date + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
                             String worksheetID = "Worksheet " + worksheetNumber;
-                            entriesHistoryList.add(new EntryItem(date, worksheetID));
+
+                            entriesHistoryList.add(new EntryItem(date, worksheetID, worksheet_user_firebase_key.getKey()));
                             worksheetNumber++;
                         }
                     }
                 }
 
                 buildRecyclerView();
-
-                // NullPointerException:
-                // getActivity() returns null, but I am not sure if I will need this though.
-                //
-                // getActivity().getSupportFragmentManager()
-                //     .beginTransaction()
-                //     .replace(R.id.fragment_container, new EntriesFragment()).commit();
             }
 
             @Override
@@ -103,14 +93,14 @@ public class EntriesFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_entries, container, false);
+        return view;
     }
 
     public void buildRecyclerView() {
         // RecyclerView and Adapter
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
-        // mLayoutManager = new LinearLayoutManager(this.getContext());
+        mLayoutManager = new LinearLayoutManager(this.getContext());
         mAdapter = new EntriesHistoryRecyclerAdapter(entriesHistoryList);
 
         /**
@@ -123,8 +113,8 @@ public class EntriesFragment extends Fragment {
 //                // changeItem(position, "Clicked");
 //            }
 //        });
-        // mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
     public long decode(String id) {
@@ -140,8 +130,6 @@ public class EntriesFragment extends Fragment {
     }
 
     /**
-     * QUESTION: DOES THIS WORK FOR PEOPLE WHO ARE IN DIFFERENT TIME ZONES??????????????????????????
-     *
      * Gets the current date in MM-dd-YYYY format.
      * @return the current date.
      */

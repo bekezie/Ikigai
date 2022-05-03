@@ -67,5 +67,4 @@ public class BottomNavigationBarFragments extends AppCompatActivity {
             .beginTransaction()
             .replace(R.id.fragment_container, new HomeNoSummaryFragment()).commit();
     }
-
 }

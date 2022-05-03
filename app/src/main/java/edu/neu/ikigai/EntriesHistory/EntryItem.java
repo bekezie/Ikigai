@@ -3,10 +3,12 @@ package edu.neu.ikigai.EntriesHistory;
 public class EntryItem {
     private String worksheetEntryDate;
     private String worksheetEntryNumber;
+    private String firebaseKey;
 
-    public EntryItem(String entryDate, String entryNumber) {
+    public EntryItem(String entryDate, String entryNumber, String key) {
         this.worksheetEntryDate = entryDate;
         this.worksheetEntryNumber = entryNumber;
+        this.firebaseKey = key;
     }
 
     public String getWorksheetEntryDate() {
@@ -23,5 +25,13 @@ public class EntryItem {
 
     public void setWorksheetEntryNumber(String number) {
         worksheetEntryNumber = number;
+    }
+
+    public String getFirebaseKey() {
+        return firebaseKey;
+    }
+
+    public void setFirebaseKey(String key) {
+        firebaseKey = key;
     }
 }
