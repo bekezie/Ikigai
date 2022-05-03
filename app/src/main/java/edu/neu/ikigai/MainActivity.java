@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView worksheetevent;
     private TextView worksheetThought;
     private TextView profile;
+    private TextView reasonThought;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         worksheetevent = (TextView) findViewById(R.id.worksheet_event);
         worksheetThought = (TextView) findViewById(R.id.worksheet_thought);
         profile = (TextView) findViewById(R.id.profile);
-
+        reasonThought = (TextView) findViewById(R.id.reasonThought);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 startActivity(new Intent(MainActivity.this, WorksheetThoughtActivity.class));
+            }
+        });
+        reasonThought.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(MainActivity.this, WorksheetReasonableThoughtActivity.class));
             }
         });
 
