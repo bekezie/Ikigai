@@ -61,7 +61,7 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
             }
         });
 
-        //init(savedInstanceState);
+        init(savedInstanceState);
         // if saved instance state == null
         // pull from db
         // else use what's in saved instance state
@@ -80,8 +80,8 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
         Map<String, Object> map = new HashMap<String,Object>();
         map.put("reasonableThought", thought);
         // Todo: uncomment
-//        mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
-        mDatabase.child("worksheet").child("ndabe").child(worksheetId).updateChildren(map);
+        mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
+        //mDatabase.child("worksheet").child("ndabe").child(worksheetId).updateChildren(map);
     }
 
     public void next() {
@@ -95,6 +95,7 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
     //pull data from database everytime a rotation occurs?
     private void init(Bundle savedInstanceState) {
         initialItemData(savedInstanceState);
+
     }
 
 //    //maintain state in the event of a rotation
@@ -139,8 +140,8 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
 
     public void getSaved(String sheetId) {
         // Todo: change back
-//        DatabaseReference ref =  mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(sheetId);
-        DatabaseReference ref = mDatabase.child("worksheet").child("ndabe").child(worksheetId);
+        DatabaseReference ref =  mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(sheetId);
+       // DatabaseReference ref = mDatabase.child("worksheet").child("ndabe").child(worksheetId);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
