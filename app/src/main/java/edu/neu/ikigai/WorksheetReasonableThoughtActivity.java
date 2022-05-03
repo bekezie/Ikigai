@@ -44,6 +44,7 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
         journalEt = (EditText) findViewById(R.id.journalEditText);
         nextButton = (Button) findViewById(R.id.thoughtNextButton);
         saveButton = (Button) findViewById(R.id.thoughtSaveButton);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
