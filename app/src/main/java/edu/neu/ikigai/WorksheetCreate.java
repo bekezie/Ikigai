@@ -56,7 +56,7 @@ public class WorksheetCreate extends AppCompatActivity {
 
     }
     @Override
-    protected void  onStart() {
+    protected void onStart() {
         super.onStart();
         FirebaseUser curruser = mAuth.getCurrentUser();
         if (curruser == null) {
