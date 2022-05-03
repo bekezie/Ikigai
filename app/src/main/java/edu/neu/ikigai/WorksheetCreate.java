@@ -30,12 +30,12 @@ public class WorksheetCreate extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         worksheetId = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).push().getKey();
-        //Todo: check with Minh to see that this is okay
-//        WorkSheet ws = new WorkSheet();
-//        ws.setEvent(new TriggeringEvent("","", ""));
-//        ws.setThought(new Thought("", ""));
+        //Todo: check with Minh to see if this is necessary
+        WorkSheet ws = new WorkSheet();
+        ws.setEvent(new TriggeringEvent("","", ""));
+        ws.setThought(new Thought("", ""));
 
-//        mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).setValue(ws);
+        mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).setValue(ws);
 
         addEventBtn = (Button) findViewById(R.id.addEventButton);
 
@@ -68,9 +68,8 @@ public class WorksheetCreate extends AppCompatActivity {
 
     public void advanceToActivity(String act) {
         switch (act) {
-            //Todo: Change back to WorksheetEventActivity.class
             case ("event"):
-                Intent intentEvent = new Intent(this, WorksheetReasonableThoughtActivity.class);
+                Intent intentEvent = new Intent(this, WorksheetEventActivity.class);
                 intentEvent.putExtra("worksheetId", worksheetId);
                 startActivity(intentEvent);
                 break;

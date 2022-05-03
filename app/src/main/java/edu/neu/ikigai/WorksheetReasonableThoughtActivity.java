@@ -141,12 +141,18 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
 
     public void getSaved(String sheetId) {
         // Todo: change back
-        DatabaseReference ref =  mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(sheetId);
+        DatabaseReference ref =  mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(sheetId).child("reasonableThought");
        // DatabaseReference ref = mDatabase.child("worksheet").child("ndabe").child(worksheetId);
+        //addListenerForSingleValueEvent
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ws = snapshot.getValue(WorkSheet.class);
+                //ws = snapshot.getValue(WorkSheet.class);
+                //System.out.println("Thought: " + ws.getThought());
+                String thought = (String) snapshot.child("thought").getValue();
+                String journal = (String) snapshot.child("journal").getValue();
+                thoughtEt.setText(thought);
+                journalEt.setText(journal);
             }
 
             @Override
@@ -155,5 +161,43 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
             }
         });
     }
-
+//
+//    public void UpdateUserWorksheet() {
+//        // Write a message to the database
+//        DatabaseReference myRef = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(updateWorksheet).child("thought");
+//        myRef.addValueEventListener(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                int count = 0;
+//
+//                for (DataSnapshot ss : snapshot.getChildren()) {
+//                    String thought = (String) ss.getValue();
+//                    if(count == 0){
+//                        thoughtEt.setText(thought);
+//                    }else if(count == 1){
+//                        journalEt.setText(thought );
+//                        break;
+//                    }
+//                    count++;
+//
+//
+////                    if (map.containsKey("thought")) {
+////
+////                        thoughtEt.setText(map.get("event"));
+////                        journalEt.setText(map.get("journal"));
+////                        break;
+////
+////                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                // Getting Post failed, log a message
+//                Log.w(TAG, "loadPost:onCancelled", error.toException());
+//            }
+//        });
+//    }
 }
