@@ -109,6 +109,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
         Map<String, Object> map = new HashMap<String,Object>();
         map.put("event", event);
         mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
+        mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).child("event").child("location").setValue(locationName.getText().toString());
     }
 
     public void next() {
@@ -127,7 +128,9 @@ public class WorksheetEventActivity extends AppCompatActivity {
         Location locationGPS = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         System.out.println("LOCATION: " + locationGPS);
         if (locationGPS != null) {
-            locationName.setText(getAndress(locationGPS.getLatitude(), locationGPS.getLatitude()));
+            String address = getAndress(locationGPS.getLatitude(), locationGPS.getLatitude());
+            locationName.setText(address);
+
 //            locationName.setText("Your Location: " + "\n" + "Latitude: " + String.valueOf(locationGPS.getLatitude()) + "\n" + "Longitude: " + String.valueOf(locationGPS.getLongitude()) );
         } else {
             Toast.makeText(this, "Unable to find location.", Toast.LENGTH_SHORT).show();
