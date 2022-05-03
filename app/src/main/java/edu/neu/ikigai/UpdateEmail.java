@@ -70,8 +70,9 @@ public class UpdateEmail extends AppCompatActivity {
 //
 //        }
 
-        if (TextUtils.isEmpty(password)) {
-            et_password.setError("Password cannot be empty!");
+
+        if (TextUtils.isEmpty(newEmail)) {
+            et_email.setError("Email cannot be empty!");
             return;
 
         }
@@ -80,8 +81,8 @@ public class UpdateEmail extends AppCompatActivity {
             return;
 
         }
-        if (TextUtils.isEmpty(email)) {
-            et_password.setError("Email cannot be empty!");
+        if (TextUtils.isEmpty(password)) {
+            et_password.setError("Password cannot be empty!");
             return;
 
         }

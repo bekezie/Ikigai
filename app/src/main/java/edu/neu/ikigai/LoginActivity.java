@@ -20,6 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import edu.neu.ikigai.Fragments.HomeSummaryFragment;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText et_username;
     private EditText et_password;

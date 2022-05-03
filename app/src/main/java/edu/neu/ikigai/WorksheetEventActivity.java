@@ -33,16 +33,30 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
+import edu.neu.ikigai.Fragments.HomeNoSummaryFragment;
+import edu.neu.ikigai.Fragments.HomeSummaryFragment;
 import edu.neu.ikigai.models.TriggeringEvent;
 import edu.neu.ikigai.models.WorkSheet;
 
 public class WorksheetEventActivity extends AppCompatActivity {
+    private static final String TAG = WorksheetEventActivity.class.getSimpleName();
     private static final int REQUEST_LOCATION = 1;
     private DatabaseReference mDatabase;
     private EditText eventEt;
@@ -53,6 +67,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
     private String worksheetId;
     private TextView locationName;
     private FirebaseAuth mAuth;
+    private String updateWorksheet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +78,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
                 new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         worksheetId = this.getIntent().getStringExtra("worksheetId");
+        updateWorksheet = "-N15WtJgaMhoCcvT0v5F";
         eventEt = (EditText) findViewById(R.id.eventEditText);
         journalEt = (EditText) findViewById(R.id.journalEditText);
         locationBtn = (ImageButton) findViewById(R.id.locationBtn);
@@ -71,7 +87,14 @@ public class WorksheetEventActivity extends AppCompatActivity {
         saveButton = (Button) findViewById(R.id.eventSaveButton);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        Log.w(TAG, "Update worksheet "+ updateWorksheet);
 
+        if(updateWorksheet != null){
+            UpdateUserWorksheet();
+            saveButton.setText("Update");
+            nextButton.setText("Cancel");
+
+        }
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +104,9 @@ public class WorksheetEventActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save();
+                if(updateWorksheet == null){
+                    save();
+                }
                 next();
             }
         });
@@ -93,6 +118,51 @@ public class WorksheetEventActivity extends AppCompatActivity {
             }
         });
     }
+    public void UpdateUserWorksheet(){
+        // Write a message to the database
+        DatabaseReference myRef = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(updateWorksheet).child("event");
+        myRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                int count = 0;
+
+                for (DataSnapshot ss : snapshot.getChildren()) {
+                    String event = (String) ss.getValue();
+                    if(count == 0){
+                        eventEt.setText(event);
+                    }else if(count == 1){
+                        journalEt.setText(event);
+                        break;
+                    }
+                    count++;
+
+
+//                    if (map.containsKey("thought")) {
+//
+//                        thoughtEt.setText(map.get("event"));
+//                        journalEt.setText(map.get("journal"));
+//                        break;
+//
+//                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+    }
+
+
+
+
 
     @Override
     protected void  onStart() {
@@ -105,16 +175,30 @@ public class WorksheetEventActivity extends AppCompatActivity {
     }
 
     public void save() {
-        TriggeringEvent event = new TriggeringEvent(eventEt.getText().toString(), journalEt.getText().toString(), "123" );
-        Map<String, Object> map = new HashMap<String,Object>();
-        map.put("event", event);
-        mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
+        if(updateWorksheet != null){
+            TriggeringEvent event = new TriggeringEvent(eventEt.getText().toString(), journalEt.getText().toString(), "123" );
+            Map<String, Object> map = new HashMap<String,Object>();
+            map.put("event", event);
+            mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(updateWorksheet).updateChildren(map);
+        }else{
+            TriggeringEvent event = new TriggeringEvent(eventEt.getText().toString(), journalEt.getText().toString(), "123" );
+            Map<String, Object> map = new HashMap<String,Object>();
+            map.put("event", event);
+            mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
+        }
+
     }
 
     public void next() {
-        Intent intent = new Intent(this, WorksheetThoughtActivity.class);
-        intent.putExtra("worksheetId", worksheetId);
-        startActivity(intent);
+        if(updateWorksheet != null){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(this, WorksheetThoughtActivity.class);
+            intent.putExtra("worksheetId", worksheetId);
+            startActivity(intent);
+        }
+
     }
 
     private void getLocation() {
