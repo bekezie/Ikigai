@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import edu.neu.ikigai.EntriesHistory.EntriesHistoryRecyclerAdapter;
@@ -91,6 +92,7 @@ public class EntriesFragment extends Fragment {
                         }
                     }
                 }
+                Collections.reverse(entriesHistoryList);
                 buildRecyclerView();
             }
 

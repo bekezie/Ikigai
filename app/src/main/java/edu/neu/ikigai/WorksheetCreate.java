@@ -71,11 +71,11 @@ public class WorksheetCreate extends AppCompatActivity {
                 intentEvent.putExtra("worksheetId", worksheetId);
                 startActivity(intentEvent);
                 break;
-            case ("thought"):
-                Intent intentThought = new Intent(this, WorksheetThoughtActivity.class);
-                intentThought.putExtra("worksheetId", worksheetId);
-                startActivity(intentThought);
-                break;
+//            case ("thought"):
+//                Intent intentThought = new Intent(this, WorksheetThoughtActivity.class);
+//                intentThought.putExtra("worksheetId", worksheetId);
+//                startActivity(intentThought);
+//                break;
 
             default:
                 break;

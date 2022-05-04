@@ -188,7 +188,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
         Location locationGPS = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         System.out.println("LOCATION: " + locationGPS);
         if (locationGPS != null) {
-            locationName.setText(getAndress(locationGPS.getLatitude(), locationGPS.getLatitude()));
+            locationName.setText(getAndress(locationGPS.getLatitude(), locationGPS.getLongitude()));
 //            locationName.setText("Your Location: " + "\n" + "Latitude: " + String.valueOf(locationGPS.getLatitude()) + "\n" + "Longitude: " + String.valueOf(locationGPS.getLongitude()) );
         } else {
             Toast.makeText(this, "Unable to find location.", Toast.LENGTH_SHORT).show();
