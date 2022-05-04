@@ -1,0 +1,378 @@
+Index: app/src/main/java/edu/neu/ikigai/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.neu.ikigai;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.os.Bundle;\n\n\nimport android.content.Intent;\nimport android.view.View;\nimport android.widget.Button;\nimport android.widget.EditText;\nimport android.widget.Toast;\n\nimport com.google.firebase.auth.FirebaseAuth;\nimport com.google.firebase.auth.FirebaseUser;\nimport com.google.firebase.database.DatabaseReference;\n\npublic class MainActivity extends AppCompatActivity {\n    private static final String TAG = MainActivity.class.getSimpleName();\n    private Button logoutBtn;\n    private FirebaseAuth mAuth;\n\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_main);\n        logoutBtn = findViewById(R.id.logoutBtn);\n        mAuth = FirebaseAuth.getInstance();\n        logoutBtn = (Button) findViewById(R.id.logoutBtn);\n        logoutBtn.setOnClickListener(new View.OnClickListener() {\n            @Override\n            public void onClick(View view) {\n                mAuth.signOut();\n                startActivity(new Intent(MainActivity.this, LoginActivity.class));\n            }\n        });\n    }\n\n    @Override\n    protected void  onStart() {\n        super.onStart();\n        FirebaseUser curruser = mAuth.getCurrentUser();\n        if (curruser == null) {\n            Intent intent = new Intent(this, LoginActivity.class);\n            startActivity(intent);\n        }\n    }\n\n\n\n\n\n\n\n\n\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/neu/ikigai/MainActivity.java b/app/src/main/java/edu/neu/ikigai/MainActivity.java
+--- a/app/src/main/java/edu/neu/ikigai/MainActivity.java	
++++ b/app/src/main/java/edu/neu/ikigai/MainActivity.java	
+@@ -18,6 +18,7 @@
+ public class MainActivity extends AppCompatActivity {
+     private static final String TAG = MainActivity.class.getSimpleName();
+     private Button logoutBtn;
++    private Button profileBtn;
+     private FirebaseAuth mAuth;
+ 
+ 
+@@ -28,6 +29,14 @@
+         logoutBtn = findViewById(R.id.logoutBtn);
+         mAuth = FirebaseAuth.getInstance();
+         logoutBtn = (Button) findViewById(R.id.logoutBtn);
++        profileBtn = (Button) findViewById(R.id.profile);
++        profileBtn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++
++                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
++            }
++        });
+         logoutBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+Index: app/src/main/res/layout/activity_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".ProfileActivity\">\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_profile.xml b/app/src/main/res/layout/activity_profile.xml
+--- a/app/src/main/res/layout/activity_profile.xml	
++++ b/app/src/main/res/layout/activity_profile.xml	
+@@ -6,4 +6,55 @@
+     android:layout_height="match_parent"
+     tools:context=".ProfileActivity">
+ 
++    <TextView
++        android:id="@+id/fullname"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="220dp"
++        android:layout_marginEnd="16dp"
++        android:text="Full Name"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.496"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/email"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Email"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/fullname" />
++
++    <TextView
++        android:id="@+id/password"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Password"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/email" />
++
++    <Button
++        android:id="@+id/et_profile"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Edit Profile"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/password"
++        app:layout_constraintVertical_bias="0.0" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/edu/neu/ikigai/ProfileActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.neu.ikigai;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.os.Bundle;\n\npublic class ProfileActivity extends AppCompatActivity {\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_profile);\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/neu/ikigai/ProfileActivity.java b/app/src/main/java/edu/neu/ikigai/ProfileActivity.java
+--- a/app/src/main/java/edu/neu/ikigai/ProfileActivity.java	
++++ b/app/src/main/java/edu/neu/ikigai/ProfileActivity.java	
+@@ -1,14 +1,81 @@
+ package edu.neu.ikigai;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
++import android.content.Intent;
+ import android.os.Bundle;
++import android.util.Log;
++import android.view.View;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.TextView;
++
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.database.DataSnapshot;
++import com.google.firebase.database.DatabaseError;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.database.ValueEventListener;
++
++import org.w3c.dom.Text;
++
++import java.util.TreeMap;
++
++import edu.neu.ikigai.models.User;
+ 
+ public class ProfileActivity extends AppCompatActivity {
+-
++    private static final String TAG = MainActivity.class.getSimpleName();
++    private TextView fullName;
++    private TextView email;
++    private TextView password;
++    private FirebaseAuth mAuth;
++    private DatabaseReference mDatabase;
++    private Button et_profileBtn;
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_profile);
++        // Connect with Firebase
++        mDatabase = FirebaseDatabase.getInstance().getReference();
++        // Connect with Firebase Authentication
++        mAuth = FirebaseAuth.getInstance();
++        fullName = (TextView) findViewById(R.id.fullname);
++        email = (TextView) findViewById(R.id.email);
++        password = (TextView) findViewById(R.id.password);
++        et_profileBtn = (Button) findViewById(R.id.et_profile);
++
++        et_profileBtn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
++            }
++        });
++        getUserDetails();
++
++
+     }
+-}
+\ No newline at end of file
++
++    private void getUserDetails() {
++        mDatabase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
++            @Override
++            public void onDataChange(@NonNull DataSnapshot snapshot) {
++
++                for (DataSnapshot ss : snapshot.getChildren()) {
++                    //User user = ss.getValue(User.class);
++//                    Log.w(TAG, "fullname"+ user.fullName);
++//                    Log.w(TAG, "email"+ user.email);
++//                    fullName.setText(user.fullName);
++//                    email.setText(user.email);
++                }
++
++            }
++
++            @Override
++            public void onCancelled(@NonNull DatabaseError error) {
++                // Getting Post failed, log a message
++                Log.w(TAG, "loadPost:onCancelled", error.toException());
++            }
++        });
++    }
++}
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".MainActivity\">\n\n\n    <Button\n        android:id=\"@+id/logoutBtn\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Logout\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.446\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.576\" />\n\n    <TextView\n        android:id=\"@+id/Home\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Home Screen\"\n        android:textSize=\"24sp\"\n        app:layout_constraintBottom_toTopOf=\"@+id/logoutBtn\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.46\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.291\" />\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	
++++ b/app/src/main/res/layout/activity_main.xml	
+@@ -11,13 +11,14 @@
+         android:id="@+id/logoutBtn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginEnd="4dp"
+         android:text="Logout"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.446"
+-        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintStart_toEndOf="@+id/profile"
+         app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="0.576" />
++        app:layout_constraintVertical_bias="1.0" />
+ 
+     <TextView
+         android:id="@+id/Home"
+@@ -32,4 +33,16 @@
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintVertical_bias="0.291" />
+ 
++    <Button
++        android:id="@+id/profile"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Profile"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.64"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="1.0" />
++
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/edu/neu/ikigai/EditProfileActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/neu/ikigai/EditProfileActivity.java b/app/src/main/java/edu/neu/ikigai/EditProfileActivity.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/edu/neu/ikigai/EditProfileActivity.java	
+@@ -0,0 +1,17 @@
++package edu.neu.ikigai;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.os.Bundle;
++import android.widget.EditText;
++
++public class EditProfileActivity extends AppCompatActivity {
++    private EditText et_fullName;
++    private EditText et_email;
++    private EditText et_password;
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_edit_profile);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    package=\"edu.neu.ikigai\">\n\n    <uses-permission android:name=\"android.permission.INTERNET\" />\n\n    <application\n        android:allowBackup=\"true\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/Theme.Ikigai\">\n        <activity\n            android:name=\".ForgotPassword\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".LoginActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".ProfileActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".RegisterActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".WorksheetDetails\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".WorksheetSummary\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".MainActivity\"\n            android:exported=\"true\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n        </activity>\n    </application>\n\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -12,6 +12,9 @@
+         android:supportsRtl="true"
+         android:theme="@style/Theme.Ikigai">
+         <activity
++            android:name=".EditProfileActivity"
++            android:exported="false" />
++        <activity
+             android:name=".ForgotPassword"
+             android:exported="false" />
+         <activity
+Index: app/src/main/res/layout/activity_edit_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_edit_profile.xml b/app/src/main/res/layout/activity_edit_profile.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/activity_edit_profile.xml	
+@@ -0,0 +1,78 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".EditProfileActivity"><![CDATA[
++
++    tools:context=".ProfileActivity">
++
++    ]]>
++
++    <EditText
++        android:id="@+id/fullname"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="184dp"
++        android:layout_marginEnd="16dp"
++        android:text="Full Name"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <EditText
++        android:id="@+id/email"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Email"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/fullname" />
++
++    <EditText
++        android:id="@+id/password"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Password"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/email" />
++
++    <Button
++        android:id="@+id/edit"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="40dp"
++        android:layout_marginStart="92dp"
++        android:layout_marginEnd="46dp"
++        android:text="Edit"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toStartOf="@+id/cancel"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/password"
++        app:layout_constraintVertical_bias="0.262" />
++
++    <Button
++        android:id="@+id/cancel"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="40dp"
++        android:layout_marginStart="46dp"
++        android:layout_marginEnd="92dp"
++        android:text="Cancel"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toEndOf="@+id/edit"
++        app:layout_constraintTop_toBottomOf="@+id/password"
++        app:layout_constraintVertical_bias="0.262" />
++
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file

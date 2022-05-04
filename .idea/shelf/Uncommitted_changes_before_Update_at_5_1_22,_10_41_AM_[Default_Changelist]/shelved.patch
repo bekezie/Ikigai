@@ -1,0 +1,881 @@
+Index: app/src/main/res/layout/activity_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".ProfileActivity\">\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_profile.xml b/app/src/main/res/layout/activity_profile.xml
+--- a/app/src/main/res/layout/activity_profile.xml	(revision 8aa63cffc81f37af8edb63c6e958e721e6c47e9b)
++++ b/app/src/main/res/layout/activity_profile.xml	(date 1651424272764)
+@@ -6,4 +6,55 @@
+     android:layout_height="match_parent"
+     tools:context=".ProfileActivity">
+ 
++    <TextView
++        android:id="@+id/fullname"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="220dp"
++        android:layout_marginEnd="16dp"
++        android:text="Full Name"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.496"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/email"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Email"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/fullname" />
++
++    <TextView
++        android:id="@+id/password"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Password"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/email" />
++
++    <Button
++        android:id="@+id/et_profile"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Edit Profile"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/password"
++        app:layout_constraintVertical_bias="0.0" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/edu/neu/ikigai/RegisterActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.neu.ikigai;\n\nimport androidx.annotation.NonNull;\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.content.Intent;\nimport android.os.Bundle;\nimport android.text.TextUtils;\nimport android.util.Log;\nimport android.util.Patterns;\nimport android.view.View;\nimport android.widget.Button;\nimport android.widget.EditText;\nimport android.widget.ProgressBar;\nimport android.widget.TextView;\nimport android.widget.Toast;\n\nimport com.google.android.gms.tasks.OnCompleteListener;\nimport com.google.android.gms.tasks.Task;\nimport com.google.firebase.auth.AuthResult;\nimport com.google.firebase.auth.FirebaseAuth;\nimport com.google.firebase.database.DatabaseReference;\nimport com.google.firebase.database.FirebaseDatabase;\n\nimport javax.security.auth.login.LoginException;\n\nimport edu.neu.ikigai.models.User;\npublic class RegisterActivity extends AppCompatActivity {\n    private static final String TAG = MainActivity.class.getSimpleName();\n    private Button submitBtn;\n    private TextView loginBtn;\n    private EditText et_fullName;\n    private EditText et_email;\n    private EditText et_password;\n    private EditText et_confirmedPass;\n    private ProgressBar progressBar;\n    private FirebaseAuth mAuth;\n    private DatabaseReference mDatabase;\n    private String token;\n    private String user;\n\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_register);\n        // Connect with Firebase\n        mDatabase = FirebaseDatabase.getInstance().getReference();\n        // Connect with Firebase Authentication\n        mAuth = FirebaseAuth.getInstance();\n        et_fullName = (EditText) findViewById(R.id.et_fullName);\n        et_email = (EditText) findViewById(R.id.et_email);\n        et_password = (EditText) findViewById(R.id.et_password);\n        et_confirmedPass = (EditText) findViewById(R.id.et_confirmed);\n        loginBtn = (TextView) findViewById(R.id.login);\n        submitBtn = (Button) findViewById(R.id.submit);\n        //progressBar = (ProgressBar) findViewById(R.id.progress_bar);\n\n\n        loginBtn.setOnClickListener(new View.OnClickListener() {\n            @Override\n            public void onClick(View view) {\n                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));\n            }\n        });\n        submitBtn.setOnClickListener(new View.OnClickListener() {\n            @Override\n            public void onClick(View view) {\n                //getToken();\n                register();\n            }\n        });\n    }\n\n    public void register() {\n        // Connect with firebase\n        String fullName  =  et_fullName.getText().toString();\n        String password = et_password.getText().toString();\n        String confirmedPassword = et_confirmedPass.getText().toString();\n        String email = et_email.getText().toString();\n        if(TextUtils.isEmpty(email)){\n            et_fullName.setError(\"Users name cannot be empty!\");\n            return;\n\n        }\n        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){\n            et_email.setError(\"Please provide valid email!\");\n            return;\n\n        }\n        if(TextUtils.isEmpty(email)){\n            et_password.setError(\"Email cannot be empty!\");\n            return;\n\n        }\n        if(TextUtils.isEmpty(password)){\n            et_password.setError(\"Password cannot be empty!\");\n            return;\n\n        }\n        if(TextUtils.isEmpty(confirmedPassword)){\n            et_confirmedPass.setError(\"Password cannot be empty!\");\n            return;\n        }\n        if(!password.equalsIgnoreCase(confirmedPassword)){\n            Toast.makeText(RegisterActivity.this, \"Passwords have to match\",Toast.LENGTH_LONG).show();\n            return;\n\n        }\n        if(password.length() < 6){\n            et_password.setError(\"Min password length should be 6 characters!\");\n           return;\n        }\n        if(confirmedPassword.length() < 6){\n            et_confirmedPass.setError(\"Min password length should be 6 characters!\");\n           return;\n        }\n\n        //progressBar.setVisibility(View.VISIBLE);\n        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {\n            @Override\n            public void onComplete(@NonNull Task<AuthResult> task) {\n                if (task.isSuccessful()) {\n                    User user = new User(fullName, email);\n                    mDatabase.child(\"user\").child(FirebaseAuth.getInstance().getCurrentUser().getUid())\n                            .setValue(user)\n                            .addOnCompleteListener(new OnCompleteListener<Void>() {\n                                @Override\n                                public void onComplete(@NonNull Task<Void> task) {\n                                    if(task.isSuccessful()){\n                                        Toast.makeText(RegisterActivity.this, \"Sign up successful\", Toast.LENGTH_LONG).show();\n                                        //progressBar.setVisibility(View.GONE);\n                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));\n                                    }else{\n                                        Toast.makeText(RegisterActivity.this, \"Registration Database Error: \"+ task.getException().getMessage(),Toast.LENGTH_LONG).show();\n                                        //progressBar.setVisibility(View.GONE);\n                                    }\n                                }\n                            });\n\n                } else {\n                    Toast.makeText(RegisterActivity.this, \"Registration Error: \"+ task.getException().getMessage(),Toast.LENGTH_LONG).show();\n                    Log.e(TAG,task.getException().getMessage());\n                }\n            }\n        });\n\n\n\n//        mDatabase = FirebaseDatabase.getInstance().getReference();\n//        mDatabase.child(\"user\").addListenerForSingleValueEvent(new ValueEventListener() {\n//            @Override\n//            public void onDataChange(@NonNull DataSnapshot snapshot) {\n//                boolean isValid = true;\n//                for (DataSnapshot u : snapshot.getChildren()) {\n//                    if (String.valueOf(u.getKey()).equalsIgnoreCase(et_username.getText().toString())) {\n//                        Toast.makeText(Register.this,\"invalid username\",Toast.LENGTH_LONG).show();\n//                        isValid = false;\n//                        break;\n//                    }\n//                }\n//                if (isValid && et_password.getText().toString().equalsIgnoreCase(et_confirmedPass.getText().toString())) {\n//                    user = et_username.getText().toString();\n//                    //checks if token needs to be updated\n//                    mDatabase.child(\"user\").child(user).push().setValue(et_password.getText().toString());\n//                    //updateToken(snapshot);\n//                    Toast.makeText(Register.this,\"Login Successful\",Toast.LENGTH_LONG).show();\n//                    getHome();\n//\n//                }\n//            }\n//\n//            @Override\n//            public void onCancelled(@NonNull DatabaseError error) {\n//\n//            }\n//        });\n    }\n\n//    public void updateToken(DataSnapshot dataSnapshot) {\n//        mDatabase.child(\"user\")\n//                .child(user)\n//                .runTransaction(new Transaction.Handler() {\n//                    @Override\n//                    public Transaction.Result doTransaction(MutableData mutableData) {\n//\n//                        String oldToken = mutableData.getValue(String.class);\n//                        if (!oldToken.isEmpty()) {\n//                            return Transaction.success(mutableData);\n//                        }\n//\n//                        mutableData.setValue(token);\n//\n//\n//                        return Transaction.success(mutableData);\n//                    }\n//\n//                    @Override\n//                    public void onComplete(DatabaseError databaseError, boolean b,\n//                                           DataSnapshot dataSnapshot) {\n//                        // Transaction completed\n//                        Log.d(TAG, \"postTransaction:onComplete:\" + databaseError);\n//                        Toast.makeText(getApplicationContext()\n//                                , \"DBError: \" + databaseError, Toast.LENGTH_SHORT).show();\n//                    }\n//                });\n//    }\n//    public void getToken(){\n//        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {\n//            @Override\n//            public void onComplete(@NonNull Task<String> task) {\n//                if(!task.isSuccessful()){\n//                    Log.e(TAG,\"Failed to get the token\");\n//                    return;\n//                }\n//                token = task.getResult();\n//                Log.d(TAG,\"Token : \"+token);\n//\n//            }\n//        }).addOnFailureListener(new OnFailureListener() {\n//            @Override\n//            public void onFailure(@NonNull Exception e) {\n//                Log.e(TAG,\"Failed to get the token : \"+e.getLocalizedMessage());\n//            }\n//        });\n//    }\n\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/neu/ikigai/RegisterActivity.java b/app/src/main/java/edu/neu/ikigai/RegisterActivity.java
+--- a/app/src/main/java/edu/neu/ikigai/RegisterActivity.java	(revision 8aa63cffc81f37af8edb63c6e958e721e6c47e9b)
++++ b/app/src/main/java/edu/neu/ikigai/RegisterActivity.java	(date 1651426568582)
+@@ -29,7 +29,7 @@
+     private static final String TAG = MainActivity.class.getSimpleName();
+     private Button submitBtn;
+     private TextView loginBtn;
+-    private EditText et_fullName;
++    //private EditText et_fullName;
+     private EditText et_email;
+     private EditText et_password;
+     private EditText et_confirmedPass;
+@@ -48,7 +48,7 @@
+         mDatabase = FirebaseDatabase.getInstance().getReference();
+         // Connect with Firebase Authentication
+         mAuth = FirebaseAuth.getInstance();
+-        et_fullName = (EditText) findViewById(R.id.et_fullName);
++        //et_fullName = (EditText) findViewById(R.id.et_fullName);
+         et_email = (EditText) findViewById(R.id.et_email);
+         et_password = (EditText) findViewById(R.id.et_password);
+         et_confirmedPass = (EditText) findViewById(R.id.et_confirmed);
+@@ -74,46 +74,46 @@
+ 
+     public void register() {
+         // Connect with firebase
+-        String fullName  =  et_fullName.getText().toString();
++        //String fullName = et_fullName.getText().toString();
+         String password = et_password.getText().toString();
+         String confirmedPassword = et_confirmedPass.getText().toString();
+         String email = et_email.getText().toString();
+-        if(TextUtils.isEmpty(email)){
+-            et_fullName.setError("Users name cannot be empty!");
+-            return;
+-
+-        }
+-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
++//        if (TextUtils.isEmpty(email)) {
++//            et_fullName.setError("Users name cannot be empty!");
++//            return;
++//
++//        }
++        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+             et_email.setError("Please provide valid email!");
+             return;
+ 
+         }
+-        if(TextUtils.isEmpty(email)){
++        if (TextUtils.isEmpty(email)) {
+             et_password.setError("Email cannot be empty!");
+             return;
+ 
+         }
+-        if(TextUtils.isEmpty(password)){
++        if (TextUtils.isEmpty(password)) {
+             et_password.setError("Password cannot be empty!");
+             return;
+ 
+         }
+-        if(TextUtils.isEmpty(confirmedPassword)){
++        if (TextUtils.isEmpty(confirmedPassword)) {
+             et_confirmedPass.setError("Password cannot be empty!");
+             return;
+         }
+-        if(!password.equalsIgnoreCase(confirmedPassword)){
+-            Toast.makeText(RegisterActivity.this, "Passwords have to match",Toast.LENGTH_LONG).show();
++        if (!password.equalsIgnoreCase(confirmedPassword)) {
++            Toast.makeText(RegisterActivity.this, "Passwords have to match", Toast.LENGTH_LONG).show();
+             return;
+ 
+         }
+-        if(password.length() < 6){
++        if (password.length() < 6) {
+             et_password.setError("Min password length should be 6 characters!");
+-           return;
++            return;
+         }
+-        if(confirmedPassword.length() < 6){
++        if (confirmedPassword.length() < 6) {
+             et_confirmedPass.setError("Min password length should be 6 characters!");
+-           return;
++            return;
+         }
+ 
+         //progressBar.setVisibility(View.VISIBLE);
+@@ -121,109 +121,31 @@
+             @Override
+             public void onComplete(@NonNull Task<AuthResult> task) {
+                 if (task.isSuccessful()) {
+-                    User user = new User(fullName, email);
+-                    mDatabase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+-                            .setValue(user)
++                    //User user = new User(fullName, email);
++                    mDatabase.child("user").child(email).setValue("")
+                             .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                 @Override
+                                 public void onComplete(@NonNull Task<Void> task) {
+-                                    if(task.isSuccessful()){
++                                    if (task.isSuccessful()) {
+                                         Toast.makeText(RegisterActivity.this, "Sign up successful", Toast.LENGTH_LONG).show();
+                                         //progressBar.setVisibility(View.GONE);
+                                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+-                                    }else{
+-                                        Toast.makeText(RegisterActivity.this, "Registration Database Error: "+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
++                                    } else {
++                                        Toast.makeText(RegisterActivity.this, "Registration Database Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                         //progressBar.setVisibility(View.GONE);
+                                     }
+                                 }
+                             });
+ 
+                 } else {
+-                    Toast.makeText(RegisterActivity.this, "Registration Error: "+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
+-                    Log.e(TAG,task.getException().getMessage());
++                    Toast.makeText(RegisterActivity.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
++                    Log.e(TAG, task.getException().getMessage());
+                 }
+             }
+         });
+ 
+ 
+-
+-//        mDatabase = FirebaseDatabase.getInstance().getReference();
+-//        mDatabase.child("user").addListenerForSingleValueEvent(new ValueEventListener() {
+-//            @Override
+-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+-//                boolean isValid = true;
+-//                for (DataSnapshot u : snapshot.getChildren()) {
+-//                    if (String.valueOf(u.getKey()).equalsIgnoreCase(et_username.getText().toString())) {
+-//                        Toast.makeText(Register.this,"invalid username",Toast.LENGTH_LONG).show();
+-//                        isValid = false;
+-//                        break;
+-//                    }
+-//                }
+-//                if (isValid && et_password.getText().toString().equalsIgnoreCase(et_confirmedPass.getText().toString())) {
+-//                    user = et_username.getText().toString();
+-//                    //checks if token needs to be updated
+-//                    mDatabase.child("user").child(user).push().setValue(et_password.getText().toString());
+-//                    //updateToken(snapshot);
+-//                    Toast.makeText(Register.this,"Login Successful",Toast.LENGTH_LONG).show();
+-//                    getHome();
+-//
+-//                }
+-//            }
+-//
+-//            @Override
+-//            public void onCancelled(@NonNull DatabaseError error) {
+-//
+-//            }
+-//        });
+     }
+-
+-//    public void updateToken(DataSnapshot dataSnapshot) {
+-//        mDatabase.child("user")
+-//                .child(user)
+-//                .runTransaction(new Transaction.Handler() {
+-//                    @Override
+-//                    public Transaction.Result doTransaction(MutableData mutableData) {
+-//
+-//                        String oldToken = mutableData.getValue(String.class);
+-//                        if (!oldToken.isEmpty()) {
+-//                            return Transaction.success(mutableData);
+-//                        }
+-//
+-//                        mutableData.setValue(token);
+-//
+-//
+-//                        return Transaction.success(mutableData);
+-//                    }
+-//
+-//                    @Override
+-//                    public void onComplete(DatabaseError databaseError, boolean b,
+-//                                           DataSnapshot dataSnapshot) {
+-//                        // Transaction completed
+-//                        Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+-//                        Toast.makeText(getApplicationContext()
+-//                                , "DBError: " + databaseError, Toast.LENGTH_SHORT).show();
+-//                    }
+-//                });
+-//    }
+-//    public void getToken(){
+-//        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+-//            @Override
+-//            public void onComplete(@NonNull Task<String> task) {
+-//                if(!task.isSuccessful()){
+-//                    Log.e(TAG,"Failed to get the token");
+-//                    return;
+-//                }
+-//                token = task.getResult();
+-//                Log.d(TAG,"Token : "+token);
+-//
+-//            }
+-//        }).addOnFailureListener(new OnFailureListener() {
+-//            @Override
+-//            public void onFailure(@NonNull Exception e) {
+-//                Log.e(TAG,"Failed to get the token : "+e.getLocalizedMessage());
+-//            }
+-//        });
+-//    }
+ 
+ 
+ }
+\ No newline at end of file
+Index: app/src/main/java/edu/neu/ikigai/ProfileActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.neu.ikigai;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.os.Bundle;\n\npublic class ProfileActivity extends AppCompatActivity {\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_profile);\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/neu/ikigai/ProfileActivity.java b/app/src/main/java/edu/neu/ikigai/ProfileActivity.java
+--- a/app/src/main/java/edu/neu/ikigai/ProfileActivity.java	(revision 8aa63cffc81f37af8edb63c6e958e721e6c47e9b)
++++ b/app/src/main/java/edu/neu/ikigai/ProfileActivity.java	(date 1651423146745)
+@@ -1,14 +1,81 @@
+ package edu.neu.ikigai;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
++import android.content.Intent;
+ import android.os.Bundle;
++import android.util.Log;
++import android.view.View;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.TextView;
++
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.database.DataSnapshot;
++import com.google.firebase.database.DatabaseError;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.database.ValueEventListener;
++
++import org.w3c.dom.Text;
++
++import java.util.TreeMap;
++
++import edu.neu.ikigai.models.User;
+ 
+ public class ProfileActivity extends AppCompatActivity {
+-
++    private static final String TAG = MainActivity.class.getSimpleName();
++    private TextView fullName;
++    private TextView email;
++    private TextView password;
++    private FirebaseAuth mAuth;
++    private DatabaseReference mDatabase;
++    private Button et_profileBtn;
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_profile);
++        // Connect with Firebase
++        mDatabase = FirebaseDatabase.getInstance().getReference();
++        // Connect with Firebase Authentication
++        mAuth = FirebaseAuth.getInstance();
++        fullName = (TextView) findViewById(R.id.fullname);
++        email = (TextView) findViewById(R.id.email);
++        password = (TextView) findViewById(R.id.password);
++        et_profileBtn = (Button) findViewById(R.id.et_profile);
++
++        et_profileBtn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
++            }
++        });
++        getUserDetails();
++
++
+     }
+-}
+\ No newline at end of file
++
++    private void getUserDetails() {
++        mDatabase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
++            @Override
++            public void onDataChange(@NonNull DataSnapshot snapshot) {
++
++                for (DataSnapshot ss : snapshot.getChildren()) {
++                    User user = ss.getValue(User.class);
++//                    Log.w(TAG, "fullname"+ user.fullName);
++//                    Log.w(TAG, "email"+ user.email);
++//                    fullName.setText(user.fullName);
++//                    email.setText(user.email);
++                }
++
++            }
++
++            @Override
++            public void onCancelled(@NonNull DatabaseError error) {
++                // Getting Post failed, log a message
++                Log.w(TAG, "loadPost:onCancelled", error.toException());
++            }
++        });
++    }
++}
+Index: app/src/main/res/layout/activity_register.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".RegisterActivity\">\n\n    <Button\n        android:id=\"@+id/submit\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"16dp\"\n        android:layout_marginTop=\"18dp\"\n        android:layout_marginEnd=\"16dp\"\n        android:padding=\"10dp\"\n        android:text=\"Sign Up\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/et_confirmed\"\n        app:layout_constraintVertical_bias=\"0.0\" />\n\n    <TextView\n        android:id=\"@+id/login\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"16dp\"\n        android:text=\"Already Registered?\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/submit\"\n        app:layout_constraintVertical_bias=\"0.045\"\n        tools:ignore=\"MissingConstraints\" />\n\n    <EditText\n        android:id=\"@+id/et_email\"\n        android:layout_width=\"379dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"16dp\"\n        android:layout_marginTop=\"16dp\"\n        android:layout_marginEnd=\"16dp\"\n        android:background=\"@drawable/fui_ic_anonymous_white_24dp\"\n        android:ems=\"10\"\n        android:hint=\"Email\"\n        android:padding=\"10dp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/et_fullName\" />\n\n    <EditText\n        android:id=\"@+id/et_password\"\n        android:layout_width=\"379dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"16dp\"\n        android:layout_marginTop=\"16dp\"\n        android:layout_marginEnd=\"16dp\"\n        android:background=\"@drawable/fui_ic_anonymous_white_24dp\"\n        android:ems=\"10\"\n        android:hint=\"Password\"\n        android:padding=\"10dp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/et_email\"\n        tools:ignore=\"MissingConstraints\" />\n\n    <EditText\n        android:id=\"@+id/et_confirmed\"\n        android:layout_width=\"379dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"16dp\"\n        android:layout_marginTop=\"16dp\"\n        android:layout_marginEnd=\"16dp\"\n        android:background=\"@drawable/fui_ic_anonymous_white_24dp\"\n        android:ems=\"10\"\n        android:hint=\"Confirm Password\"\n        android:padding=\"10dp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/et_password\"\n        tools:ignore=\"MissingConstraints\" />\n\n    <TextView\n        android:id=\"@+id/title\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Ikigai\"\n        android:textSize=\"25sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.051\" />\n\n    <TextView\n        android:id=\"@+id/create\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Create New Account\"\n        android:textSize=\"15sp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/title\" />\n\n    <EditText\n        android:id=\"@+id/et_fullName\"\n        android:layout_width=\"379dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"16dp\"\n        android:layout_marginTop=\"64dp\"\n        android:layout_marginEnd=\"16dp\"\n        android:background=\"@drawable/fui_ic_anonymous_white_24dp\"\n        android:ems=\"10\"\n        android:hint=\"Full Name\"\n        android:inputType=\"textPersonName\"\n        android:padding=\"10dp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/create\"\n        app:layout_constraintVertical_bias=\"0.054\" />\n\n    <ProgressBar\n        android:id=\"@+id/progress_bar\"\n        style=\"?android:attr/progressBarStyleLarge\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerInParent=\"true\"\n\n        android:visibility=\"gone\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintLeft_toLeftOf=\"parent\"\n        app:layout_constraintLeft_toRightOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        />\n\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_register.xml b/app/src/main/res/layout/activity_register.xml
+--- a/app/src/main/res/layout/activity_register.xml	(revision 8aa63cffc81f37af8edb63c6e958e721e6c47e9b)
++++ b/app/src/main/res/layout/activity_register.xml	(date 1651425800121)
+@@ -34,20 +34,7 @@
+         app:layout_constraintVertical_bias="0.045"
+         tools:ignore="MissingConstraints" />
+ 
+-    <EditText
+-        android:id="@+id/et_email"
+-        android:layout_width="379dp"
+-        android:layout_height="wrap_content"
+-        android:layout_marginStart="16dp"
+-        android:layout_marginTop="16dp"
+-        android:layout_marginEnd="16dp"
+-        android:background="@drawable/fui_ic_anonymous_white_24dp"
+-        android:ems="10"
+-        android:hint="Email"
+-        android:padding="10dp"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/et_fullName" />
++
+ 
+     <EditText
+         android:id="@+id/et_password"
+@@ -103,23 +90,39 @@
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/title" />
+ 
++    <!--    <EditText-->
++<!--        android:id="@+id/et_fullName"-->
++<!--        android:layout_width="379dp"-->
++<!--        android:layout_height="wrap_content"-->
++<!--        android:layout_marginStart="16dp"-->
++<!--        android:layout_marginTop="64dp"-->
++<!--        android:layout_marginEnd="16dp"-->
++<!--        android:background="@drawable/fui_ic_anonymous_white_24dp"-->
++<!--        android:ems="10"-->
++<!--        android:hint="Full Name"-->
++<!--        android:inputType="textPersonName"-->
++<!--        android:padding="10dp"-->
++<!--        app:layout_constraintBottom_toBottomOf="parent"-->
++<!--        app:layout_constraintEnd_toEndOf="parent"-->
++<!--        app:layout_constraintStart_toStartOf="parent"-->
++<!--        app:layout_constraintTop_toBottomOf="@+id/create"-->
++<!--        app:layout_constraintVertical_bias="0.054" />-->
++
+     <EditText
+-        android:id="@+id/et_fullName"
++        android:id="@+id/et_email"
+         android:layout_width="379dp"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="16dp"
+-        android:layout_marginTop="64dp"
++        android:layout_marginTop="100dp"
+         android:layout_marginEnd="16dp"
+         android:background="@drawable/fui_ic_anonymous_white_24dp"
+         android:ems="10"
+-        android:hint="Full Name"
+-        android:inputType="textPersonName"
++        android:hint="Email Address"
+         android:padding="10dp"
+-        app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/create"
+-        app:layout_constraintVertical_bias="0.054" />
++
++        app:layout_constraintTop_toBottomOf="@+id/create" />
+ 
+     <ProgressBar
+         android:id="@+id/progress_bar"
+Index: app/src/main/res/layout/activity_login.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".LoginActivity\">\n\n    <Button\n        android:id=\"@+id/submit\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"16dp\"\n        android:layout_marginTop=\"18dp\"\n        android:layout_marginEnd=\"16dp\"\n        android:padding=\"10dp\"\n        android:text=\"Login\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/et_password\" />\n\n    <TextView\n        android:id=\"@+id/register\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"52dp\"\n        android:layout_marginTop=\"64dp\"\n        android:text=\"Not Registered?\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"@+id/submit\" />\n\n    <TextView\n        android:id=\"@+id/forgot\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"64dp\"\n        android:layout_marginEnd=\"52dp\"\n        android:text=\"Forgot Password?\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"@+id/submit\" />\n\n    <EditText\n        android:id=\"@+id/et_email\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"16dp\"\n        android:layout_marginTop=\"132dp\"\n        android:layout_marginEnd=\"16dp\"\n        android:background=\"@drawable/fui_ic_anonymous_white_24dp\"\n        android:ems=\"10\"\n        android:hint=\"Email\"\n        android:padding=\"10dp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/log\" />\n\n    <EditText\n        android:id=\"@+id/et_password\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"16dp\"\n        android:layout_marginTop=\"28dp\"\n        android:layout_marginEnd=\"16dp\"\n        android:background=\"@drawable/fui_ic_anonymous_white_24dp\"\n        android:ems=\"10\"\n        android:hint=\"Password\"\n        android:padding=\"10dp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/et_email\" />\n\n    <TextView\n        android:id=\"@+id/title\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Ikigai\"\n        android:textSize=\"25sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.051\" />\n\n    <TextView\n        android:id=\"@+id/log\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Login\"\n        android:textSize=\"15sp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/title\" />\n\n    <ProgressBar\n        android:id=\"@+id/progress_bar\"\n        style=\"?android:attr/progressBarStyleLarge\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_centerInParent=\"true\"\n\n        android:visibility=\"gone\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintLeft_toLeftOf=\"parent\"\n        app:layout_constraintLeft_toRightOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        />\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_login.xml b/app/src/main/res/layout/activity_login.xml
+--- a/app/src/main/res/layout/activity_login.xml	(revision 8aa63cffc81f37af8edb63c6e958e721e6c47e9b)
++++ b/app/src/main/res/layout/activity_login.xml	(date 1651425611727)
+@@ -48,7 +48,7 @@
+         android:layout_marginEnd="16dp"
+         android:background="@drawable/fui_ic_anonymous_white_24dp"
+         android:ems="10"
+-        android:hint="Email"
++        android:hint="Email Address"
+         android:padding="10dp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    package=\"edu.neu.ikigai\">\n\n    <application\n        android:allowBackup=\"true\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/Theme.Ikigai\">\n        <activity\n            android:name=\".ForgotPassword\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".LoginActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".ProfileActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".RegisterActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".WorksheetDetails\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".WorksheetSummary\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".BottomNavigationBarFragments\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".MainActivity\"\n            android:exported=\"true\">\n\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n        </activity>\n    </application>\n\n    <uses-permission android:name=\"android.permission.INTERNET\" />\n\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 8aa63cffc81f37af8edb63c6e958e721e6c47e9b)
++++ b/app/src/main/AndroidManifest.xml	(date 1651423415983)
+@@ -2,6 +2,8 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="edu.neu.ikigai">
+ 
++    <uses-permission android:name="android.permission.INTERNET" />
++
+     <application
+         android:allowBackup="true"
+         android:icon="@mipmap/ic_launcher"
+@@ -9,6 +11,9 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.Ikigai">
++        <activity
++            android:name=".EditProfileActivity"
++            android:exported="false" />
+         <activity
+             android:name=".ForgotPassword"
+             android:exported="false" />
+@@ -33,7 +38,6 @@
+         <activity
+             android:name=".MainActivity"
+             android:exported="true">
+-
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+@@ -42,6 +46,4 @@
+         </activity>
+     </application>
+ 
+-    <uses-permission android:name="android.permission.INTERNET" />
+-
+ </manifest>
+\ No newline at end of file
+Index: app/src/main/java/edu/neu/ikigai/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.neu.ikigai;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.os.Bundle;\n\n\n\n\nimport androidx.annotation.NonNull;\nimport androidx.annotation.Nullable;\nimport androidx.appcompat.app.AppCompatActivity;\nimport androidx.core.app.NotificationCompat;\nimport androidx.core.app.NotificationManagerCompat;\n\nimport android.app.Activity;\nimport android.app.NotificationChannel;\nimport android.app.NotificationManager;\nimport android.app.PendingIntent;\nimport android.content.Intent;\nimport android.os.Build;\nimport android.os.Bundle;\nimport android.util.Log;\nimport android.view.View;\nimport android.widget.Button;\nimport android.widget.EditText;\nimport android.widget.TextView;\nimport android.widget.Toast;\n\nimport com.google.android.gms.tasks.OnCompleteListener;\nimport com.google.android.gms.tasks.OnFailureListener;\nimport com.google.android.gms.tasks.Task;\nimport com.google.firebase.messaging.FirebaseMessaging;\nimport com.google.firebase.database.ChildEventListener;\nimport com.google.firebase.database.DataSnapshot;\nimport com.google.firebase.database.DatabaseError;\nimport com.google.firebase.database.DatabaseReference;\nimport com.google.firebase.database.FirebaseDatabase;\nimport com.google.firebase.database.MutableData;\nimport com.google.firebase.database.Transaction;\nimport com.google.firebase.database.ValueEventListener;\n\npublic class MainActivity extends AppCompatActivity {\n    private static final String TAG = MainActivity.class.getSimpleName();\n    private Button submitBtn;\n    private EditText et_username;\n    private DatabaseReference mDatabase;\n    private String token;\n    private String user;\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_main);\n        et_username = (EditText) findViewById(R.id.et_user);\n        submitBtn = (Button) findViewById(R.id.submit);\n        submitBtn.setOnClickListener(new View.OnClickListener() {\n            @Override\n            public void onClick(View view) {\n                getToken();\n                login();\n            }\n        });\n    }\n\n    public void login() {\n        // Connect with firebase\n        mDatabase = FirebaseDatabase.getInstance().getReference();\n//        // Update the score in realtime\n//        mDatabase.child(\"user\").addChildEventListener(new ChildEventListener() {\n//            @Override\n//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {\n//                Log.d(TAG,\"CHILD ADDEDDDDDDDDD\");\n//                Auth(snapshot);\n//                //Log.e(TAG, \"onChildAdded: dataSnapshot = \" + snapshot.getValue().toString());\n//            }\n//\n//            @Override\n//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {\n//\n//            }\n//\n//            @Override\n//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {\n//\n//            }\n//\n//            @Override\n//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {\n//\n//            }\n//\n//            @Override\n//            public void onCancelled(@NonNull DatabaseError error) {\n//\n//            }\n//        });\n\n        mDatabase.child(\"user\").addListenerForSingleValueEvent(new ValueEventListener() {\n            @Override\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\n                boolean isValid = false;\n                for (DataSnapshot u : snapshot.getChildren()) {\n                    if (String.valueOf(u.getKey()).equalsIgnoreCase(et_username.getText().toString())) {\n                        user = et_username.getText().toString();\n                        //checks if token needs to be updated\n                        updateToken(snapshot);\n                        Toast.makeText(MainActivity.this,\"Login Successful\",Toast.LENGTH_LONG).show();\n                        isValid = true;\n                        getHomeScreenActivity();\n                        // getWorksheetSummary();\n                    }\n                }\n                if (!isValid) {\n                    Toast.makeText(MainActivity.this,\"invalid username\",Toast.LENGTH_LONG).show();\n                }\n            }\n\n            @Override\n            public void onCancelled(@NonNull DatabaseError error) {\n\n            }\n        });\n    }\n\n    public void updateToken(DataSnapshot dataSnapshot) {\n        mDatabase.child(\"user\")\n            .child(user)\n            .runTransaction(new Transaction.Handler() {\n                @Override\n                public Transaction.Result doTransaction(MutableData mutableData) {\n\n                    String oldToken = mutableData.getValue(String.class);\n                    if (!oldToken.isEmpty()) {\n                        return Transaction.success(mutableData);\n                    }\n\n                    mutableData.setValue(token);\n\n                    return Transaction.success(mutableData);\n                }\n\n                @Override\n                public void onComplete(DatabaseError databaseError, boolean b,\n                                       DataSnapshot dataSnapshot) {\n                    // Transaction completed\n                    Log.d(TAG, \"postTransaction:onComplete:\" + databaseError);\n                    Toast.makeText(getApplicationContext()\n                            , \"DBError: \" + databaseError, Toast.LENGTH_SHORT).show();\n                }\n            });\n    }\n    public void getToken(){\n        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {\n            @Override\n            public void onComplete(@NonNull Task<String> task) {\n                if(!task.isSuccessful()){\n                    Log.e(TAG,\"Failed to get the token\");\n                    return;\n                }\n                token = task.getResult();\n                Log.d(TAG,\"Token : \"+token);\n\n            }\n        }).addOnFailureListener(new OnFailureListener() {\n            @Override\n            public void onFailure(@NonNull Exception e) {\n                Log.e(TAG,\"Failed to get the token : \"+e.getLocalizedMessage());\n            }\n        });\n    }\n\n//        public void Auth(DataSnapshot dataSnapshot) {\n//            Log.e(TAG,\"key: \"+ dataSnapshot.getKey());\n//            Log.e(TAG,\"input: \"+ et_username.getText().toString());\n//            if (dataSnapshot.getKey().equalsIgnoreCase(et_username.getText().toString())) {\n//                user = et_username.getText().toString();\n//                //checks if token needs to be updated\n//                updateToken(dataSnapshot);\n//                Toast.makeText(MainActivity.this,\"Login Successful\",Toast.LENGTH_LONG).show();\n//                getMessagePage();\n//\n//            } else {\n//                //toast invalid username\n//                Toast.makeText(MainActivity.this,\"invalid username\",Toast.LENGTH_LONG).show();\n//            }\n//\n//    };\n\n    public void getHomeScreenActivity() {\n        Intent intent = new Intent(this, HomeScreen.class);\n        startActivity(intent);\n    }\n\n    public void getWorksheetSummary() {\n        Intent intent = new Intent(this, WorksheetSummary.class);\n        intent.putExtra(\"SENDER_USERNAME\", user);\n\n        startActivity(intent);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/neu/ikigai/MainActivity.java b/app/src/main/java/edu/neu/ikigai/MainActivity.java
+--- a/app/src/main/java/edu/neu/ikigai/MainActivity.java	(revision 8aa63cffc81f37af8edb63c6e958e721e6c47e9b)
++++ b/app/src/main/java/edu/neu/ikigai/MainActivity.java	(date 1651423074188)
+@@ -5,197 +5,55 @@
+ import android.os.Bundle;
+ 
+ 
+-
+-
+-import androidx.annotation.NonNull;
+-import androidx.annotation.Nullable;
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.app.NotificationCompat;
+-import androidx.core.app.NotificationManagerCompat;
+-
+-import android.app.Activity;
+-import android.app.NotificationChannel;
+-import android.app.NotificationManager;
+-import android.app.PendingIntent;
+ import android.content.Intent;
+-import android.os.Build;
+-import android.os.Bundle;
+-import android.util.Log;
+ import android.view.View;
+ import android.widget.Button;
+ import android.widget.EditText;
+-import android.widget.TextView;
+ import android.widget.Toast;
+ 
+-import com.google.android.gms.tasks.OnCompleteListener;
+-import com.google.android.gms.tasks.OnFailureListener;
+-import com.google.android.gms.tasks.Task;
+-import com.google.firebase.messaging.FirebaseMessaging;
+-import com.google.firebase.database.ChildEventListener;
+-import com.google.firebase.database.DataSnapshot;
+-import com.google.firebase.database.DatabaseError;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
+ import com.google.firebase.database.DatabaseReference;
+-import com.google.firebase.database.FirebaseDatabase;
+-import com.google.firebase.database.MutableData;
+-import com.google.firebase.database.Transaction;
+-import com.google.firebase.database.ValueEventListener;
+ 
+ public class MainActivity extends AppCompatActivity {
+     private static final String TAG = MainActivity.class.getSimpleName();
+-    private Button submitBtn;
+-    private EditText et_username;
+-    private DatabaseReference mDatabase;
+-    private String token;
+-    private String user;
++    private Button logoutBtn;
++    private FirebaseAuth mAuth;
++
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+-        et_username = (EditText) findViewById(R.id.et_user);
+-        submitBtn = (Button) findViewById(R.id.submit);
+-        submitBtn.setOnClickListener(new View.OnClickListener() {
++        logoutBtn = findViewById(R.id.logoutBtn);
++        mAuth = FirebaseAuth.getInstance();
++        logoutBtn = (Button) findViewById(R.id.logoutBtn);
++        logoutBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+-                getToken();
+-                login();
++                mAuth.signOut();
++                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+             }
+         });
+     }
+-
+-    public void login() {
+-        // Connect with firebase
+-        mDatabase = FirebaseDatabase.getInstance().getReference();
+-//        // Update the score in realtime
+-//        mDatabase.child("user").addChildEventListener(new ChildEventListener() {
+-//            @Override
+-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+-//                Log.d(TAG,"CHILD ADDEDDDDDDDDD");
+-//                Auth(snapshot);
+-//                //Log.e(TAG, "onChildAdded: dataSnapshot = " + snapshot.getValue().toString());
+-//            }
+-//
+-//            @Override
+-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+-//
+-//            }
+-//
+-//            @Override
+-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+-//
+-//            }
+-//
+-//            @Override
+-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+-//
+-//            }
+-//
+-//            @Override
+-//            public void onCancelled(@NonNull DatabaseError error) {
+-//
+-//            }
+-//        });
+-
+-        mDatabase.child("user").addListenerForSingleValueEvent(new ValueEventListener() {
+-            @Override
+-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+-                boolean isValid = false;
+-                for (DataSnapshot u : snapshot.getChildren()) {
+-                    if (String.valueOf(u.getKey()).equalsIgnoreCase(et_username.getText().toString())) {
+-                        user = et_username.getText().toString();
+-                        //checks if token needs to be updated
+-                        updateToken(snapshot);
+-                        Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
+-                        isValid = true;
+-                        getHomeScreenActivity();
+-                        // getWorksheetSummary();
+-                    }
+-                }
+-                if (!isValid) {
+-                    Toast.makeText(MainActivity.this,"invalid username",Toast.LENGTH_LONG).show();
+-                }
+-            }
+ 
+-            @Override
+-            public void onCancelled(@NonNull DatabaseError error) {
+-
+-            }
+-        });
+-    }
+-
+-    public void updateToken(DataSnapshot dataSnapshot) {
+-        mDatabase.child("user")
+-            .child(user)
+-            .runTransaction(new Transaction.Handler() {
+-                @Override
+-                public Transaction.Result doTransaction(MutableData mutableData) {
+-
+-                    String oldToken = mutableData.getValue(String.class);
+-                    if (!oldToken.isEmpty()) {
+-                        return Transaction.success(mutableData);
+-                    }
+-
+-                    mutableData.setValue(token);
+-
+-                    return Transaction.success(mutableData);
+-                }
+-
+-                @Override
+-                public void onComplete(DatabaseError databaseError, boolean b,
+-                                       DataSnapshot dataSnapshot) {
+-                    // Transaction completed
+-                    Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+-                    Toast.makeText(getApplicationContext()
+-                            , "DBError: " + databaseError, Toast.LENGTH_SHORT).show();
+-                }
+-            });
+-    }
+-    public void getToken(){
+-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+-            @Override
+-            public void onComplete(@NonNull Task<String> task) {
+-                if(!task.isSuccessful()){
+-                    Log.e(TAG,"Failed to get the token");
+-                    return;
+-                }
+-                token = task.getResult();
+-                Log.d(TAG,"Token : "+token);
+-
+-            }
+-        }).addOnFailureListener(new OnFailureListener() {
+-            @Override
+-            public void onFailure(@NonNull Exception e) {
+-                Log.e(TAG,"Failed to get the token : "+e.getLocalizedMessage());
+-            }
+-        });
+-    }
+-
+-//        public void Auth(DataSnapshot dataSnapshot) {
+-//            Log.e(TAG,"key: "+ dataSnapshot.getKey());
+-//            Log.e(TAG,"input: "+ et_username.getText().toString());
+-//            if (dataSnapshot.getKey().equalsIgnoreCase(et_username.getText().toString())) {
+-//                user = et_username.getText().toString();
+-//                //checks if token needs to be updated
+-//                updateToken(dataSnapshot);
+-//                Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
+-//                getMessagePage();
+-//
+-//            } else {
+-//                //toast invalid username
+-//                Toast.makeText(MainActivity.this,"invalid username",Toast.LENGTH_LONG).show();
+-//            }
+-//
+-//    };
+-
+-    public void getHomeScreenActivity() {
+-        Intent intent = new Intent(this, HomeScreen.class);
+-        startActivity(intent);
+-    }
+-
+-    public void getWorksheetSummary() {
+-        Intent intent = new Intent(this, WorksheetSummary.class);
+-        intent.putExtra("SENDER_USERNAME", user);
+-
+-        startActivity(intent);
+-    }
+-}
++    @Override
++    protected void  onStart() {
++        super.onStart();
++        FirebaseUser curruser = mAuth.getCurrentUser();
++        if (curruser == null) {
++            Intent intent = new Intent(this, LoginActivity.class);
++            startActivity(intent);
++        }
++    }
++
++
++
++
++
++
++
++
++
++
++}
+\ No newline at end of file
+Index: app/src/main/java/edu/neu/ikigai/EditProfileActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/neu/ikigai/EditProfileActivity.java b/app/src/main/java/edu/neu/ikigai/EditProfileActivity.java
+new file mode 100644
+--- /dev/null	(date 1651425431892)
++++ b/app/src/main/java/edu/neu/ikigai/EditProfileActivity.java	(date 1651425431892)
+@@ -0,0 +1,14 @@
++package edu.neu.ikigai;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.os.Bundle;
++
++public class EditProfileActivity extends AppCompatActivity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_edit_profile);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".MainActivity\">\n\n\n    <Button\n        android:id=\"@+id/logoutBtn\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Logout\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.446\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.576\" />\n\n    <TextView\n        android:id=\"@+id/Home\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Home Screen\"\n        android:textSize=\"24sp\"\n        app:layout_constraintBottom_toTopOf=\"@+id/logoutBtn\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.46\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.291\" />\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 8aa63cffc81f37af8edb63c6e958e721e6c47e9b)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1651423668232)
+@@ -11,7 +11,7 @@
+         android:id="@+id/logoutBtn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:text="Logout"
++        android:text="SignOut"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.446"
+Index: app/src/main/res/layout/activity_edit_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_edit_profile.xml b/app/src/main/res/layout/activity_edit_profile.xml
+new file mode 100644
+--- /dev/null	(date 1651424272803)
++++ b/app/src/main/res/layout/activity_edit_profile.xml	(date 1651424272803)
+@@ -0,0 +1,72 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".EditProfileActivity">
++
++    tools:context=".ProfileActivity">
++
++    <EditText
++        android:id="@+id/fullname"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="220dp"
++        android:layout_marginEnd="16dp"
++        android:text="Full Name"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.496"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <EditText
++        android:id="@+id/email"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Email"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/fullname" />
++
++    <EditText
++        android:id="@+id/password"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="40dp"
++        android:layout_marginEnd="16dp"
++        android:text="Password"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/email" />
++
++    <Button
++        android:id="@+id/edit"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++
++        android:layout_marginStart="40dp"
++        android:text="Edit"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/password"
++        app:layout_constraintVertical_bias="0.23000002" />
++
++    <Button
++        android:id="@+id/cancel"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginEnd="40dp"
++        android:text="Cancel"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/password"
++        app:layout_constraintVertical_bias="0.23000002" />
++
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file

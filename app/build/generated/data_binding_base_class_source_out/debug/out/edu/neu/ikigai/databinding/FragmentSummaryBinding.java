@@ -4,7 +4,6 @@ package edu.neu.ikigai.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
@@ -23,14 +22,10 @@ public final class FragmentSummaryBinding implements ViewBinding {
   @NonNull
   public final RecyclerView recyclerView;
 
-  @NonNull
-  public final TextView textView;
-
   private FragmentSummaryBinding(@NonNull NestedScrollView rootView,
-      @NonNull RecyclerView recyclerView, @NonNull TextView textView) {
+      @NonNull RecyclerView recyclerView) {
     this.rootView = rootView;
     this.recyclerView = recyclerView;
-    this.textView = textView;
   }
 
   @Override
@@ -66,13 +61,7 @@ public final class FragmentSummaryBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.textView;
-      TextView textView = ViewBindings.findChildViewById(rootView, id);
-      if (textView == null) {
-        break missingId;
-      }
-
-      return new FragmentSummaryBinding((NestedScrollView) rootView, recyclerView, textView);
+      return new FragmentSummaryBinding((NestedScrollView) rootView, recyclerView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

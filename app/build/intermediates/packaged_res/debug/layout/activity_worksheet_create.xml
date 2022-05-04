@@ -8,41 +8,43 @@
 
     <Button
         android:id="@+id/addThoughtButton"
-        android:layout_width="52dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="92dp"
         android:text="+"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addEventButton" />
 
     <TextView
         android:id="@+id/addThoughttextView"
-        android:layout_width="92dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="144dp"
         android:text="Add thoughts"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/addThoughtButton"
         app:layout_constraintTop_toBottomOf="@+id/addEventtextView" />
 
     <Button
         android:id="@+id/addEventButton"
-        android:layout_width="52dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
         android:text="+"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/addEventtextView"
-        android:layout_width="92dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
         android:text="Add a event"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/addEventButton"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

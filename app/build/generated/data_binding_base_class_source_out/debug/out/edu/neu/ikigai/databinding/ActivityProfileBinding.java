@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +21,10 @@ public final class ActivityProfileBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final EditText email;
+  public final TextView currentEmailTitle;
+
+  @NonNull
+  public final TextView email;
 
   @NonNull
   public final Button etEmail;
@@ -31,22 +33,19 @@ public final class ActivityProfileBinding implements ViewBinding {
   public final Button etPassword;
 
   @NonNull
-  public final EditText password;
-
-  @NonNull
   public final TextView profile;
 
   @NonNull
   public final TextView title;
 
-  private ActivityProfileBinding(@NonNull ConstraintLayout rootView, @NonNull EditText email,
-      @NonNull Button etEmail, @NonNull Button etPassword, @NonNull EditText password,
-      @NonNull TextView profile, @NonNull TextView title) {
+  private ActivityProfileBinding(@NonNull ConstraintLayout rootView,
+      @NonNull TextView currentEmailTitle, @NonNull TextView email, @NonNull Button etEmail,
+      @NonNull Button etPassword, @NonNull TextView profile, @NonNull TextView title) {
     this.rootView = rootView;
+    this.currentEmailTitle = currentEmailTitle;
     this.email = email;
     this.etEmail = etEmail;
     this.etPassword = etPassword;
-    this.password = password;
     this.profile = profile;
     this.title = title;
   }
@@ -78,8 +77,14 @@ public final class ActivityProfileBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.currentEmailTitle;
+      TextView currentEmailTitle = ViewBindings.findChildViewById(rootView, id);
+      if (currentEmailTitle == null) {
+        break missingId;
+      }
+
       id = R.id.email;
-      EditText email = ViewBindings.findChildViewById(rootView, id);
+      TextView email = ViewBindings.findChildViewById(rootView, id);
       if (email == null) {
         break missingId;
       }
@@ -96,12 +101,6 @@ public final class ActivityProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.password;
-      EditText password = ViewBindings.findChildViewById(rootView, id);
-      if (password == null) {
-        break missingId;
-      }
-
       id = R.id.profile;
       TextView profile = ViewBindings.findChildViewById(rootView, id);
       if (profile == null) {
@@ -114,8 +113,8 @@ public final class ActivityProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityProfileBinding((ConstraintLayout) rootView, email, etEmail, etPassword,
-          password, profile, title);
+      return new ActivityProfileBinding((ConstraintLayout) rootView, currentEmailTitle, email,
+          etEmail, etPassword, profile, title);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

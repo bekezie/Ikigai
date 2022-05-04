@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-66:12
-INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-66:12
-INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-66:12
-INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-66:12
+ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-68:12
 MERGED from [androidx.databinding:viewbinding:7.1.1] /Users/macuser/.gradle/caches/transforms-3/488f550920098c5bd068ab4a89e8342e/transformed/viewbinding-7.1.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/macuser/.gradle/caches/transforms-3/32985e5a8881ac740351cd55cfd03ed5/transformed/navigation-ui-2.3.5/AndroidManifest.xml:17:1-24:12
 MERGED from [com.firebaseui:firebase-ui-auth:7.2.0] /Users/macuser/.gradle/caches/transforms-3/d016ac4dc6836fe0b27632ada728d14d/transformed/firebase-ui-auth-7.2.0/AndroidManifest.xml:2:1-109:12
@@ -101,20 +101,20 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/macuser/.gradle/ca
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/macuser/.gradle/caches/transforms-3/f8119e5072d8310dce5f90652b6cfd1f/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /Users/macuser/.gradle/caches/transforms-3/4bce6d0c261fbe796dbf07b5e0c0b2c2/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/macuser/.gradle/caches/transforms-3/ced140e0f4d6d2729c7cba66725ee933/transformed/annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
-INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-66:12
-INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-66:12
-INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-66:12
+INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-68:12
 	package
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:3:5-29
 		INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-66:12
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-68:12
 		INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-66:12
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:1-68:12
 		INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:2:11-69
@@ -187,7 +187,7 @@ MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.1.1] /U
 	android:name
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:9:22-76
 application
-ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:11:5-64:19
+ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:11:5-66:19
 MERGED from [com.firebaseui:firebase-ui-auth:7.2.0] /Users/macuser/.gradle/caches/transforms-3/d016ac4dc6836fe0b27632ada728d14d/transformed/firebase-ui-auth-7.2.0/AndroidManifest.xml:15:5-107:19
 MERGED from [com.firebaseui:firebase-ui-auth:7.2.0] /Users/macuser/.gradle/caches/transforms-3/d016ac4dc6836fe0b27632ada728d14d/transformed/firebase-ui-auth-7.2.0/AndroidManifest.xml:15:5-107:19
 MERGED from [com.google.android.material:material:1.5.0] /Users/macuser/.gradle/caches/transforms-3/74a76c514a2f6353862f1e47c80fa160/transformed/material-1.5.0/AndroidManifest.xml:22:5-20
@@ -278,94 +278,94 @@ MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/macuser/.gradle/cach
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:12:9-35
 	android:theme
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:17:9-44
-activity#edu.neu.ikigai.WorksheetCreate
+activity#edu.neu.ikigai.UpdateEmail
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:18:9-20:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:20:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:19:13-44
-activity#edu.neu.ikigai.WorksheetThoughtActivity
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:19:13-40
+activity#edu.neu.ikigai.WorksheetCreate
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:21:9-23:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:23:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:22:13-53
-activity#edu.neu.ikigai.WorksheetEventActivity
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:22:13-44
+activity#edu.neu.ikigai.WorksheetThoughtActivity
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:24:9-26:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:25:13-51
-activity#edu.neu.ikigai.WorksheetDistortionsActivity
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:25:13-53
+activity#edu.neu.ikigai.WorksheetEventActivity
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:27:9-29:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:29:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:28:13-57
-activity#edu.neu.ikigai.WorksheetReasonableThoughtActivity
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:28:13-51
+activity#edu.neu.ikigai.WorksheetDistortionsActivity
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:30:9-32:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:32:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:31:13-63
-activity#edu.neu.ikigai.ForgotPassword
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:31:13-57
+activity#edu.neu.ikigai.WorksheetReasonableThoughtActivity
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:33:9-35:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:35:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:34:13-43
-activity#edu.neu.ikigai.LoginActivity
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:34:13-63
+activity#edu.neu.ikigai.ForgotPassword
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:36:9-38:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:38:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:37:13-42
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:37:13-43
 activity#edu.neu.ikigai.ProfileActivity
-ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:39:9-41:40
-	android:exported
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:41:13-37
-	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:40:13-44
-activity#edu.neu.ikigai.RegisterActivity
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:42:9-44:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:44:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:43:13-45
-activity#edu.neu.ikigai.WorksheetDetails
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:43:13-44
+activity#edu.neu.ikigai.RegisterActivity
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:45:9-47:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:47:13-37
 	android:name
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:46:13-45
-activity#edu.neu.ikigai.WorksheetSummary
+activity#edu.neu.ikigai.WorksheetDetails
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:48:9-50:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:50:13-37
 	android:name
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:49:13-45
-activity#edu.neu.ikigai.BottomNavigationBarFragments
+activity#edu.neu.ikigai.WorksheetSummary
 ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:51:9-53:40
 	android:exported
 		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:53:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:52:13-57
-activity#edu.neu.ikigai.MainActivity
-ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:54:9-63:20
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:52:13-45
+activity#edu.neu.ikigai.BottomNavigationBarFragments
+ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:54:9-56:40
 	android:exported
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:56:13-36
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:56:13-37
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:55:13-41
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:55:13-57
+activity#edu.neu.ikigai.LoginActivity
+ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:57:9-65:20
+	android:exported
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:59:13-36
+	android:name
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:58:13-42
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:58:13-62:29
+ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:60:13-64:29
 action#android.intent.action.MAIN
-ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:59:17-69
+ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:61:17-69
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:59:25-66
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:61:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:61:17-77
+ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:63:17-77
 	android:name
-		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:61:27-74
+		ADDED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml:63:27-74
 uses-sdk
 INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/AndroidManifest.xml

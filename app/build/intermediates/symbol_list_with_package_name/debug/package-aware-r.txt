@@ -2784,6 +2784,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id automatic
 id automatic_thought
 id barrier
 id baseline
@@ -2812,6 +2813,7 @@ id button_resend_email
 id button_sign_in
 id cache_measures
 id callMeasure
+id cancelBtn
 id cancel_action
 id cancel_button
 id carryVelocity
@@ -2836,6 +2838,7 @@ id clip_horizontal
 id clip_vertical
 id clockwise
 id closest
+id cognitive
 id cognitiveDistortionsTitle
 id cognitive_distortions
 id collapseActionView
@@ -2856,6 +2859,7 @@ id country_list
 id create
 id create_worksheet
 id cross_device_linking_body
+id currentEmailTitle
 id currentState
 id custom
 id customPanel
@@ -2922,7 +2926,9 @@ id enterAlways
 id enterAlwaysCollapsed
 id et_confirmed
 id et_email
+id et_newEmail
 id et_password
+id event
 id eventEditText
 id eventNextButton
 id eventSaveButton
@@ -3075,7 +3081,6 @@ id name
 id name_layout
 id nav_controller_view_tag
 id nav_entries
-id nav_exercise
 id nav_home
 id nav_host_fragment_container
 id nav_more
@@ -3125,6 +3130,7 @@ id phone_number
 id pin
 id position
 id postLayout
+id primary
 id primary_emotion
 id profile
 id progress_bar
@@ -3133,7 +3139,6 @@ id progress_horizontal
 id radio
 id ratio
 id reasonThought
-id reasonable_thoughts
 id rectangles
 id recyclerView
 id register
@@ -3241,7 +3246,6 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
-id textView
 id textView2
 id text_input_end_icon
 id text_input_error_icon
@@ -3282,6 +3286,8 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id update
+id updateBtn
 id useLogo
 id vertical_only
 id view_offset_helper
@@ -3408,6 +3414,7 @@ layout activity_login
 layout activity_main
 layout activity_profile
 layout activity_register
+layout activity_update_email
 layout activity_worksheet_create
 layout activity_worksheet_details
 layout activity_worksheet_distortions

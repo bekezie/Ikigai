@@ -20,16 +20,25 @@ public final class FragmentHomeSummaryBinding implements ViewBinding {
   private final NestedScrollView rootView;
 
   @NonNull
+  public final TextView automatic;
+
+  @NonNull
   public final TextView automaticThought;
+
+  @NonNull
+  public final TextView cognitive;
 
   @NonNull
   public final TextView cognitiveDistortions;
 
   @NonNull
-  public final TextView primaryEmotion;
+  public final TextView event;
 
   @NonNull
-  public final TextView reasonableThoughts;
+  public final TextView primary;
+
+  @NonNull
+  public final TextView primaryEmotion;
 
   @NonNull
   public final TextView textView2;
@@ -38,14 +47,18 @@ public final class FragmentHomeSummaryBinding implements ViewBinding {
   public final TextView triggeringEvent;
 
   private FragmentHomeSummaryBinding(@NonNull NestedScrollView rootView,
-      @NonNull TextView automaticThought, @NonNull TextView cognitiveDistortions,
-      @NonNull TextView primaryEmotion, @NonNull TextView reasonableThoughts,
-      @NonNull TextView textView2, @NonNull TextView triggeringEvent) {
+      @NonNull TextView automatic, @NonNull TextView automaticThought, @NonNull TextView cognitive,
+      @NonNull TextView cognitiveDistortions, @NonNull TextView event, @NonNull TextView primary,
+      @NonNull TextView primaryEmotion, @NonNull TextView textView2,
+      @NonNull TextView triggeringEvent) {
     this.rootView = rootView;
+    this.automatic = automatic;
     this.automaticThought = automaticThought;
+    this.cognitive = cognitive;
     this.cognitiveDistortions = cognitiveDistortions;
+    this.event = event;
+    this.primary = primary;
     this.primaryEmotion = primaryEmotion;
-    this.reasonableThoughts = reasonableThoughts;
     this.textView2 = textView2;
     this.triggeringEvent = triggeringEvent;
   }
@@ -77,9 +90,21 @@ public final class FragmentHomeSummaryBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.automatic;
+      TextView automatic = ViewBindings.findChildViewById(rootView, id);
+      if (automatic == null) {
+        break missingId;
+      }
+
       id = R.id.automatic_thought;
       TextView automaticThought = ViewBindings.findChildViewById(rootView, id);
       if (automaticThought == null) {
+        break missingId;
+      }
+
+      id = R.id.cognitive;
+      TextView cognitive = ViewBindings.findChildViewById(rootView, id);
+      if (cognitive == null) {
         break missingId;
       }
 
@@ -89,15 +114,21 @@ public final class FragmentHomeSummaryBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.primary_emotion;
-      TextView primaryEmotion = ViewBindings.findChildViewById(rootView, id);
-      if (primaryEmotion == null) {
+      id = R.id.event;
+      TextView event = ViewBindings.findChildViewById(rootView, id);
+      if (event == null) {
         break missingId;
       }
 
-      id = R.id.reasonable_thoughts;
-      TextView reasonableThoughts = ViewBindings.findChildViewById(rootView, id);
-      if (reasonableThoughts == null) {
+      id = R.id.primary;
+      TextView primary = ViewBindings.findChildViewById(rootView, id);
+      if (primary == null) {
+        break missingId;
+      }
+
+      id = R.id.primary_emotion;
+      TextView primaryEmotion = ViewBindings.findChildViewById(rootView, id);
+      if (primaryEmotion == null) {
         break missingId;
       }
 
@@ -113,8 +144,9 @@ public final class FragmentHomeSummaryBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentHomeSummaryBinding((NestedScrollView) rootView, automaticThought,
-          cognitiveDistortions, primaryEmotion, reasonableThoughts, textView2, triggeringEvent);
+      return new FragmentHomeSummaryBinding((NestedScrollView) rootView, automatic,
+          automaticThought, cognitive, cognitiveDistortions, event, primary, primaryEmotion,
+          textView2, triggeringEvent);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

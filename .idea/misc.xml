@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_directions_run_24.xml" value="0.2455" />
+        <entry key="app/src/main/res/layout/activity_bottom_navigation_bar_fragments.xml" value="0.3768518518518518" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.322463768115942" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.322463768115942" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.322463768115942" />
@@ -14,8 +16,10 @@
         <entry key="app/src/main/res/layout/activity_worksheet_summary.xml" value="0.322463768115942" />
         <entry key="app/src/main/res/layout/activity_worksheet_thought.xml" value="0.322463768115942" />
         <entry key="app/src/main/res/layout/fragment_entries.xml" value="0.5536458333333333" />
+        <entry key="app/src/main/res/layout/fragment_exercise.xml" value="0.3768518518518518" />
         <entry key="app/src/main/res/layout/fragment_home_summary.xml" value="0.5677083333333334" />
-        <entry key="app/src/main/res/layout/fragment_summary.xml" value="0.33796296296296297" />
+        <entry key="app/src/main/res/layout/fragment_summary.xml" value="0.16712328767123288" />
+        <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.328125" />
       </map>
     </option>
   </component>

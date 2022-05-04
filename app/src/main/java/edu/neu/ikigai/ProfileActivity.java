@@ -26,14 +26,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private TextView fullName;
-    private EditText email;
-    private EditText password;
+    private static final String TAG = ProfileActivity.class.getSimpleName();
+    //private TextView fullName;
+    private TextView email;
+    //private EditText password;
     private FirebaseAuth mAuth;
     //private DatabaseReference mDatabase;
     private Button et_emailBtn;
     private Button et_passwordBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,61 +44,59 @@ public class ProfileActivity extends AppCompatActivity {
         // Connect with Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
         //fullName = (TextView) findViewById(R.id.fullname);
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
+        email = (TextView) findViewById(R.id.email);
+        email.setText(mAuth.getCurrentUser().getEmail());
+        //password = (EditText) findViewById(R.id.password);
         et_emailBtn = (Button) findViewById(R.id.et_email);
         et_passwordBtn = (Button) findViewById(R.id.et_password);
 
         et_emailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UpdateEmail();
+                startActivity(new Intent(ProfileActivity.this, UpdateEmail.class));
 
             }
         });
         et_passwordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ResetPassword();
+                startActivity(new Intent(ProfileActivity.this, ForgotPassword.class));
 
             }
         });
-       getUserDetails();
+       //getUserDetails();
 
 
     }
 
-    private void UpdateEmail() {
 
-    }
-
-    private void getUserDetails() {
-        email.setText(mAuth.getCurrentUser().getEmail());
-
-    }
-    public void ResetPassword() {
-        String userEmail = email.getText().toString();
-        if (TextUtils.isEmpty(userEmail)) {
-            email.setError("Email cannot be empty");
-            return;
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
-            email.setError("Please provide valid email!");
-            return;
-
-        }
-        mAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(ProfileActivity.this, "Check your email to reset your password", Toast.LENGTH_LONG).show();
-
-                } else {
-                    Toast.makeText(ProfileActivity.this, "Reset Password Error: "+ task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
+//    private void getUserDetails() {
+//        email.setText(mAuth.getCurrentUser().getEmail());
+//
+//    }
+//    public void ResetPassword() {
+//        String userEmail = email.getText().toString();
+//        if (TextUtils.isEmpty(userEmail)) {
+//            email.setError("Email cannot be empty");
+//            return;
+//        }
+//        if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+//            email.setError("Please provide valid email!");
+//            return;
+//
+//        }
+//        mAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()) {
+//                    Toast.makeText(ProfileActivity.this, "Check your email to reset your password", Toast.LENGTH_LONG).show();
+//
+//                } else {
+//                    Toast.makeText(ProfileActivity.this, "Reset Password Error: "+ task.getException().getMessage(), Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
+//    }
 
     @Override
     protected void  onStart() {

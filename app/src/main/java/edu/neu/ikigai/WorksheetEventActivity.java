@@ -33,16 +33,30 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
+import edu.neu.ikigai.Fragments.HomeNoSummaryFragment;
+import edu.neu.ikigai.Fragments.HomeSummaryFragment;
 import edu.neu.ikigai.models.TriggeringEvent;
 import edu.neu.ikigai.models.WorkSheet;
 
 public class WorksheetEventActivity extends AppCompatActivity {
+    private static final String TAG = WorksheetEventActivity.class.getSimpleName();
     private static final int REQUEST_LOCATION = 1;
     private DatabaseReference mDatabase;
     private EditText eventEt;
@@ -53,6 +67,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
     private String worksheetId;
     private TextView locationName;
     private FirebaseAuth mAuth;
+    //private String updateWorksheet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +78,8 @@ public class WorksheetEventActivity extends AppCompatActivity {
                 new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         worksheetId = this.getIntent().getStringExtra("worksheetId");
+        //worksheetId = "-N15WtJgaMhoCcvT0v5F";
+        //updateWorksheet = "-N15WtJgaMhoCcvT0v5F";
         eventEt = (EditText) findViewById(R.id.eventEditText);
         journalEt = (EditText) findViewById(R.id.journalEditText);
         locationBtn = (ImageButton) findViewById(R.id.locationBtn);
@@ -71,7 +88,14 @@ public class WorksheetEventActivity extends AppCompatActivity {
         saveButton = (Button) findViewById(R.id.eventSaveButton);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        //Log.w(TAG, "Update worksheet "+ updateWorksheet);
 
+//        if(worksheetId != null){
+//            SavedWorksheet();
+//            saveButton.setText("Update");
+//            nextButton.setText("Cancel");
+//
+//        }
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +105,9 @@ public class WorksheetEventActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save();
+                if(worksheetId == null){
+                    save();
+                }
                 next();
             }
         });
@@ -93,6 +119,35 @@ public class WorksheetEventActivity extends AppCompatActivity {
             }
         });
     }
+    public void SavedWorksheet(){
+        // Write a message to the database
+        DatabaseReference myRef = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).child("event");
+        myRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                String event = (String) snapshot.child("event").getValue();
+                String journal = (String) snapshot.child("journal").getValue();
+
+                        eventEt.setText(event);
+
+                        journalEt.setText(journal);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+    }
+
+
+
+
 
     @Override
     protected void  onStart() {
@@ -112,11 +167,16 @@ public class WorksheetEventActivity extends AppCompatActivity {
         mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).child("event").child("location").setValue(locationName.getText().toString());
     }
 
-    // Todo: change back to WorksheetThoughtActivity
     public void next() {
-        Intent intent = new Intent(this, WorksheetDistortionsActivity.class);
-        intent.putExtra("worksheetId", worksheetId);
-        startActivity(intent);
+        if(worksheetId == null){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(this, WorksheetThoughtActivity.class);
+            intent.putExtra("worksheetId", worksheetId);
+            startActivity(intent);
+        }
+
     }
 
     private void getLocation() {
@@ -129,9 +189,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
         Location locationGPS = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         System.out.println("LOCATION: " + locationGPS);
         if (locationGPS != null) {
-            String address = getAndress(locationGPS.getLatitude(), locationGPS.getLatitude());
-            locationName.setText(address);
-
+            locationName.setText(getAndress(locationGPS.getLatitude(), locationGPS.getLatitude()));
 //            locationName.setText("Your Location: " + "\n" + "Latitude: " + String.valueOf(locationGPS.getLatitude()) + "\n" + "Longitude: " + String.valueOf(locationGPS.getLongitude()) );
         } else {
             Toast.makeText(this, "Unable to find location.", Toast.LENGTH_SHORT).show();

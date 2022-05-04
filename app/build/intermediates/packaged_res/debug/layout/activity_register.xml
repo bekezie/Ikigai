@@ -49,6 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create" />
 
+
     <EditText
         android:id="@+id/et_password"
         android:layout_width="379dp"
@@ -59,11 +60,13 @@
         android:background="@drawable/fui_ic_anonymous_white_24dp"
         android:ems="10"
         android:hint="Password"
+        android:inputType="textPassword"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email"
         tools:ignore="MissingConstraints" />
+
 
     <EditText
         android:id="@+id/et_confirmed"
@@ -72,6 +75,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:inputType="textPassword"
         android:background="@drawable/fui_ic_anonymous_white_24dp"
         android:ems="10"
         android:hint="Confirm Password"
@@ -127,13 +131,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create"
+        app:layout_constraintVertical_bias="0.3" />
         />
 
 

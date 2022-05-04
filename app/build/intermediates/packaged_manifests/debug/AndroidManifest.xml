@@ -41,6 +41,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.Ikigai" >
         <activity
+            android:name="edu.neu.ikigai.UpdateEmail"
+            android:exported="false" />
+        <activity
             android:name="edu.neu.ikigai.WorksheetCreate"
             android:exported="false" />
         <activity
@@ -58,9 +61,9 @@
         <activity
             android:name="edu.neu.ikigai.ForgotPassword"
             android:exported="false" />
-        <activity
-            android:name="edu.neu.ikigai.LoginActivity"
-            android:exported="false" />
+        <!-- <activity -->
+        <!-- android:name=".LoginActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name="edu.neu.ikigai.ProfileActivity"
             android:exported="false" />
@@ -77,7 +80,7 @@
             android:name="edu.neu.ikigai.BottomNavigationBarFragments"
             android:exported="false" />
         <activity
-            android:name="edu.neu.ikigai.MainActivity"
+            android:name="edu.neu.ikigai.LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

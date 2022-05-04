@@ -45,10 +45,6 @@ public class BottomNavigationBarFragments extends AppCompatActivity {
                     selectedFragment = new EntriesFragment();
                     fragmentNumber = 2;
                     break;
-                case R.id.nav_exercise: // Exercise Fragment
-                    selectedFragment = new ExerciseFragment();
-                    fragmentNumber = 3;
-                    break;
                 case R.id.nav_more:     // More Fragment
                     selectedFragment = new MoreFragment();
                     fragmentNumber = 4;

@@ -80,8 +80,8 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
     }
 
     public void next() {
-        // TODO: temporarily going straight to distortions instead of emotions
-        Intent intent = new Intent(this, WorksheetSummary.class);
+        save();
+        Intent intent = new Intent(this, BottomNavigationBarFragments.class);
         intent.putExtra("worksheetId", worksheetId);
         startActivity(intent);
     }

@@ -29,16 +29,18 @@ public class EntriesHistoryRecyclerHolder extends RecyclerView.ViewHolder {
         worksheetEntryDate = entryCardView.findViewById(R.id.worksheet_entry_date);
         worksheetEntryNumber = entryCardView.findViewById(R.id.worksheet_entry_number);
 
-        // sets a 'setOnClickerListener' on an entry card in RecyclerView
-        worksheetEntryCard = entryCardView.findViewById(R.id.worksheet_entry_card_view);
-        worksheetEntryCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Log.d("EntriesHistoryRecyclerHolder", "Clicked: " + worksheetEntryNumber.getText());
 
-                Intent summaryIntent = new Intent(entryCardView.getContext(), WorksheetSummary.class);
-                entryCardView.getContext().startActivity(summaryIntent);
-            }
-        });
+        // sets a 'setOnClickerListener' on an entry card in RecyclerView
+//        worksheetEntryCard = entryCardView.findViewById(R.id.worksheet_entry_card_view);
+//        worksheetEntryCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Log.d("EntriesHistoryRecyclerHolder", "Clicked: " + worksheetEntryNumber.getText());
+//
+//                Intent summaryIntent = new Intent(entryCardView.getContext(), WorksheetSummary.class);
+//
+//                entryCardView.getContext().startActivity(summaryIntent);
+//            }
+//        });
     }
 }

@@ -5,33 +5,86 @@
       <config />
     </shared>
   </component>
+<<<<<<< HEAD
+=======
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+>>>>>>> e1b49d4951ceced971b4e749939a383f04772be3
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="8a8522a5-8429-4a31-971f-358c632481c4" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="d602de21-7c29-4118-8535-b2a21e77bb90" name="Default Changelist" comment="" />
+>>>>>>> e1b49d4951ceced971b4e749939a383f04772be3
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/macuser/.android/avd/Pixel_3_API_29.avd]" />
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/bernardekezie/.android/avd/Pixel_3a_API_27.avd]" />
+>>>>>>> e1b49d4951ceced971b4e749939a383f04772be3
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
   </component>
+<<<<<<< HEAD
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile" />
+=======
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ikigai" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ikigai" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ikigai" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+>>>>>>> e1b49d4951ceced971b4e749939a383f04772be3
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="28gQ11II5BsbvK7mT3J1S4q75ae" />
+=======
+  <component name="ProjectId" id="27sxSNUXKIILlEmew3ln7tgDpyN" />
+>>>>>>> e1b49d4951ceced971b4e749939a383f04772be3
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -42,7 +95,27 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="cidr.known.project.marker" value="true" />
+<<<<<<< HEAD
     <property name="memory.settings.postsync.last.time.stamp" value="1651635619222" />
+=======
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.737944019">
+      <recent name="edu.neu.ikigai" />
+    </key>
+    <key name="android.template.-1350687732">
+      <recent name="edu.neu.ikigai" />
+    </key>
+    <key name="android.template.-847656060">
+      <recent name="edu.neu.ikigai" />
+    </key>
+    <key name="android.template.956400078">
+      <recent name="edu.neu.ikigai" />
+    </key>
+    <key name="android.template.-2001072623">
+      <recent name="edu.neu.ikigai" />
+    </key>
+>>>>>>> e1b49d4951ceced971b4e749939a383f04772be3
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
@@ -108,15 +181,24 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="8a8522a5-8429-4a31-971f-358c632481c4" name="Default Changelist" comment="" />
       <created>1651635529726</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651635529726</updated>
+=======
+      <changelist id="d602de21-7c29-4118-8535-b2a21e77bb90" name="Default Changelist" comment="" />
+      <created>1650122593821</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1650122593821</updated>
+>>>>>>> e1b49d4951ceced971b4e749939a383f04772be3
     </task>
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+<<<<<<< HEAD
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -130,4 +212,17 @@
       </breakpoints>
     </breakpoint-manager>
   </component>
+=======
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+>>>>>>> e1b49d4951ceced971b4e749939a383f04772be3
 </project>

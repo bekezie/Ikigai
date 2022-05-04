@@ -16,6 +16,10 @@
         "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_forgot_password.xml"
     },
     {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_update_email.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_update_email.xml"
+    },
+    {
         "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_worksheet_distortions.xml",
         "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_worksheet_distortions.xml"
     },

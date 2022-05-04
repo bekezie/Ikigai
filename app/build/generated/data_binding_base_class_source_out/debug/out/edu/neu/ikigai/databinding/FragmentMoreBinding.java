@@ -22,9 +22,14 @@ public final class FragmentMoreBinding implements ViewBinding {
   @NonNull
   public final Button logoutBtn;
 
-  private FragmentMoreBinding(@NonNull ConstraintLayout rootView, @NonNull Button logoutBtn) {
+  @NonNull
+  public final Button profile;
+
+  private FragmentMoreBinding(@NonNull ConstraintLayout rootView, @NonNull Button logoutBtn,
+      @NonNull Button profile) {
     this.rootView = rootView;
     this.logoutBtn = logoutBtn;
+    this.profile = profile;
   }
 
   @Override
@@ -60,7 +65,13 @@ public final class FragmentMoreBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentMoreBinding((ConstraintLayout) rootView, logoutBtn);
+      id = R.id.profile;
+      Button profile = ViewBindings.findChildViewById(rootView, id);
+      if (profile == null) {
+        break missingId;
+      }
+
+      return new FragmentMoreBinding((ConstraintLayout) rootView, logoutBtn, profile);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
