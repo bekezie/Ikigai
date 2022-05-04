@@ -28,6 +28,7 @@ import edu.neu.ikigai.R;
 import edu.neu.ikigai.WorksheetCreate;
 import edu.neu.ikigai.WorksheetDistortionsActivity;
 import edu.neu.ikigai.WorksheetEventActivity;
+import edu.neu.ikigai.WorksheetReasonableThoughtActivity;
 import edu.neu.ikigai.WorksheetThoughtActivity;
 
 public class HomeSummaryFragment extends Fragment {
@@ -48,6 +49,19 @@ public class HomeSummaryFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         getWorksheetDetails();
+        reasonable_thought = (TextView) view.findViewById(R.id.primary_emotion);
+
+        reasonable_thought.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent();
+                intent.setClass(HomeSummaryFragment.this.getActivity(), WorksheetReasonableThoughtActivity.class);
+                intent.putExtra("worksheetId", worksheetId);
+                getActivity().startActivity(intent);
+
+            }
+        });
         automatic_thought = (TextView) view.findViewById(R.id.automatic);
         automatic_thought.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +113,8 @@ public class HomeSummaryFragment extends Fragment {
                 String reasonThought = (String) snapshot.child("reasonableThought").child("thought").getValue();
                 event.setText(eventTrigger);
                 automatic_thought.setText(thought);
+                reasonable_thought.setText(reasonThought);
+
 
 
 

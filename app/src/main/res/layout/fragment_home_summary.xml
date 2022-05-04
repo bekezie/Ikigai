@@ -17,7 +17,7 @@
             android:layout_marginTop="60dp"
             android:text="4.CognitiveDistortions"
             android:textSize="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/reasonable_thoughts"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/primary_emotion" />
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="3. PrimaryEmotion"
+            android:text="3. ReasonableThought"
             android:textSize="30dp"
             app:layout_constraintBottom_toTopOf="@+id/cognitive_distortions"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,30 +71,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread" />
 
-        <TextView
-            android:id="@+id/reasonable_thoughts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="5. ReasonableThought"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.527"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cognitive_distortions" />
 
         <TextView
             android:id="@+id/cognitive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="69dp"
-            android:layout_marginBottom="53dp"
+            android:layout_marginTop="76dp"
             android:text="Text Here"
-            app:layout_constraintBottom_toBottomOf="@+id/reasonable_thoughts"
+
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/cognitive_distortions"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/cognitive_distortions" />
 
         <TextView
             android:id="@+id/primary"
