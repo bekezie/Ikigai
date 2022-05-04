@@ -15,11 +15,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import edu.neu.ikigai.LoginActivity;
 import edu.neu.ikigai.MainActivity;
+import edu.neu.ikigai.ProfileActivity;
 import edu.neu.ikigai.R;
 
 public class MoreFragment extends Fragment {
 
     private Button logoutBtn;
+    private Button profileBtn;
     private FirebaseAuth mAuth;
 
     @Nullable
@@ -30,6 +32,13 @@ public class MoreFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
+        profileBtn = (Button) view.findViewById(R.id.profile);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MoreFragment.this.getActivity(), ProfileActivity.class));
+            }
+        });
         logoutBtn = (Button) view.findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

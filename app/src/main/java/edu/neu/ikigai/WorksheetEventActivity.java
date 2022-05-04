@@ -67,7 +67,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
     private String worksheetId;
     private TextView locationName;
     private FirebaseAuth mAuth;
-    private String updateWorksheet;
+    //private String updateWorksheet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,8 @@ public class WorksheetEventActivity extends AppCompatActivity {
                 new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         worksheetId = this.getIntent().getStringExtra("worksheetId");
-        updateWorksheet = "-N15WtJgaMhoCcvT0v5F";
+        //worksheetId = "-N15WtJgaMhoCcvT0v5F";
+        //updateWorksheet = "-N15WtJgaMhoCcvT0v5F";
         eventEt = (EditText) findViewById(R.id.eventEditText);
         journalEt = (EditText) findViewById(R.id.journalEditText);
         locationBtn = (ImageButton) findViewById(R.id.locationBtn);
@@ -87,10 +88,10 @@ public class WorksheetEventActivity extends AppCompatActivity {
         saveButton = (Button) findViewById(R.id.eventSaveButton);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        Log.w(TAG, "Update worksheet "+ updateWorksheet);
+        //Log.w(TAG, "Update worksheet "+ updateWorksheet);
 
-        if(updateWorksheet != null){
-            UpdateUserWorksheet();
+        if(worksheetId != null){
+            SavedWorksheet();
             saveButton.setText("Update");
             nextButton.setText("Cancel");
 
@@ -104,7 +105,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(updateWorksheet == null){
+                if(worksheetId == null){
                     save();
                 }
                 next();
@@ -118,36 +119,20 @@ public class WorksheetEventActivity extends AppCompatActivity {
             }
         });
     }
-    public void UpdateUserWorksheet(){
+    public void SavedWorksheet(){
         // Write a message to the database
-        DatabaseReference myRef = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(updateWorksheet).child("event");
+        DatabaseReference myRef = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).child("event");
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                int count = 0;
+                String event = (String) snapshot.child("event").getValue();
+                String journal = (String) snapshot.child("journal").getValue();
 
-                for (DataSnapshot ss : snapshot.getChildren()) {
-                    String event = (String) ss.getValue();
-                    if(count == 0){
                         eventEt.setText(event);
-                    }else if(count == 1){
-                        journalEt.setText(event);
-                        break;
-                    }
-                    count++;
 
-
-//                    if (map.containsKey("thought")) {
-//
-//                        thoughtEt.setText(map.get("event"));
-//                        journalEt.setText(map.get("journal"));
-//                        break;
-//
-//                    }
-
-                }
+                        journalEt.setText(journal);
 
 
             }
@@ -175,22 +160,16 @@ public class WorksheetEventActivity extends AppCompatActivity {
     }
 
     public void save() {
-        if(updateWorksheet != null){
-            TriggeringEvent event = new TriggeringEvent(eventEt.getText().toString(), journalEt.getText().toString(), "123" );
-            Map<String, Object> map = new HashMap<String,Object>();
-            map.put("event", event);
-            mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(updateWorksheet).updateChildren(map);
-        }else{
             TriggeringEvent event = new TriggeringEvent(eventEt.getText().toString(), journalEt.getText().toString(), "123" );
             Map<String, Object> map = new HashMap<String,Object>();
             map.put("event", event);
             mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
-        }
+
 
     }
 
     public void next() {
-        if(updateWorksheet != null){
+        if(worksheetId != null){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }else{

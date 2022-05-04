@@ -9,6 +9,6 @@ public class WorksheetSummary extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_worksheet_summary);
+        setContentView(R.layout.fragment_home_summary);
     }
 }
