@@ -1,15 +1,23 @@
 package edu.neu.ikigai.Fragments;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,62 +26,71 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import edu.neu.ikigai.EntriesHistory.EntriesHistoryRecyclerAdapter;
+import edu.neu.ikigai.EntriesHistory.EntryItem;
 import edu.neu.ikigai.R;
 
 public class EntriesFragment extends Fragment {
 
-    private String user = "austin"; // HARDCODED @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    private View view;
+
+    private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    // protected FragmentActivity mActivity;
+    // RecyclerView and RecyclerAdapter
+    private RecyclerView mRecyclerView;
+    private EntriesHistoryRecyclerAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    ArrayList<EntryItem> entriesHistoryList = new ArrayList<EntryItem>();
+
+    private String user;
 
     @Nullable
-    // @Override
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        String key = "-N0wZ7olzZ2lP42l6JNK";
-        long timestamp = decode(key);
+        view = inflater.inflate(R.layout.fragment_entries, container, false);
 
-        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-        Date date = new Date(timestamp);
-        String test = dateFormat.format(date);
-        Log.d("date:", date.toString() + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        Log.d("test", test + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        user = mAuth.getInstance().getCurrentUser().getUid();
+
+        entriesHistoryList = new ArrayList<>();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        // Searches the 'history' branch in the database
-        mDatabase.child("history").addListenerForSingleValueEvent(new ValueEventListener() {
+        // Searches the 'worksheet' branch in the database
+        mDatabase.child("worksheet").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 // Searches for the user in the 'history' branch
-                for (DataSnapshot history_user : snapshot.getChildren()) {
+                for (DataSnapshot worksheet_user : snapshot.getChildren()) {
                     // if the user in the 'history' branch is found
-                    if (String.valueOf(history_user.getKey()).equalsIgnoreCase(user)) {
+                    if (String.valueOf(worksheet_user.getKey()).equalsIgnoreCase(user)) {
 
-                        // Searches for today's date inside the 'history/user' branch
-                        for (DataSnapshot history_user_date : history_user.getChildren()) {
+                        int worksheetNumber = 1;
 
-                            // if today's date is found inside the 'history/user' branch
-                            if (String.valueOf(history_user_date.getKey()).equals(getDate())) {
+                        // Searches for the keys inside the 'worksheet/user' branch path
+                        for (DataSnapshot worksheet_user_firebase_key : worksheet_user.getChildren()) {
 
-                                break;
-                            }
+                            long timestamp = decode(worksheet_user_firebase_key.getKey());
+
+                            DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                            String date = dateFormat.format(new Date(timestamp));
+                            // Log.d("date:", date);
+
+                            // "Worksheet 1", "Worksheet 2", "Worksheet 3", etc.
+                            String worksheetName = "Worksheet " + worksheetNumber;
+
+                            entriesHistoryList.add(new EntryItem(date, worksheetName, worksheet_user_firebase_key.getKey()));
+                            worksheetNumber++;
                         }
                     }
                 }
-
-                /**
-                 * NULLPOINTEREXCEPTION()
-                 * getActivity() returns null! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                 * NOT SURE IF I EVEN NEED THIS THOUGH
-                 */
-                // getActivity().getSupportFragmentManager()
-                //     .beginTransaction()
-                //     .replace(R.id.fragment_container, new EntriesFragment()).commit();
+                buildRecyclerView();
             }
 
             @Override
@@ -82,7 +99,18 @@ public class EntriesFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_summary, container, false);
+        return view;
+    }
+
+    public void buildRecyclerView() {
+        // RecyclerView and Adapter
+        mRecyclerView = view.findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this.getContext());
+        mAdapter = new EntriesHistoryRecyclerAdapter(entriesHistoryList);
+
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
     public long decode(String id) {
@@ -98,8 +126,6 @@ public class EntriesFragment extends Fragment {
     }
 
     /**
-     * QUESTION: DOES THIS WORK FOR PEOPLE WHO ARE IN DIFFERENT TIME ZONES??????????????????????????
-     *
      * Gets the current date in MM-dd-YYYY format.
      * @return the current date.
      */
@@ -110,5 +136,16 @@ public class EntriesFragment extends Fragment {
         String currentDate = dateFormat.format(date);
         // Toast.makeText(BottomNavigationBarFragments.this,currentDate,Toast.LENGTH_LONG).show();
         return currentDate;
+    }
+
+    /**
+     * Get the name of the user currently logged in.
+     *
+     * @return the sender's name.
+     */
+    public String getSender() {
+        Intent intent = getActivity().getIntent();
+        String sender = intent.getStringExtra("SENDER_USERNAME");
+        return sender;
     }
 }
