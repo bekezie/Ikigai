@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,12 +70,11 @@ public class EntriesFragment extends Fragment {
                         // Searches for the keys inside the 'worksheet/user' branch path
                         for (DataSnapshot worksheet_user_firebase_key : worksheet_user.getChildren()) {
 
-                            // Log.d("KEY FOUND: ", worksheet_user_firebase_key.getKey());
                             long timestamp = decode(worksheet_user_firebase_key.getKey());
 
                             DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
                             String date = dateFormat.format(new Date(timestamp));
-                            Log.d("date:", date + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                            // Log.d("date:", date);
 
                             String worksheetID = "Worksheet " + worksheetNumber;
 
@@ -103,16 +103,6 @@ public class EntriesFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(this.getContext());
         mAdapter = new EntriesHistoryRecyclerAdapter(entriesHistoryList);
 
-        /**
-         * TODO:
-         * THIS IS WHERE YOU'LL SET FUNCTIONALITY FOR CLICKING EACH OF THE ENTRY CARDS
-         */
-//        mAdapter.setOnLinkClickListener(new EntriesHistoryRecyclerAdapter.OnLinkClickListener() {
-//            @Override
-//            public void onLinkClick(int position) {
-//                // changeItem(position, "Clicked");
-//            }
-//        });
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
     }

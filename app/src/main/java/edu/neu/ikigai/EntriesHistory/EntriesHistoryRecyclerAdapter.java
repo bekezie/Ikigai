@@ -15,11 +15,15 @@ import edu.neu.ikigai.R;
 public class EntriesHistoryRecyclerAdapter extends RecyclerView.Adapter<EntriesHistoryRecyclerHolder> {
 
     private ArrayList<EntryItem> entriesHistoryList;
-//    private OnLinkClickListener mListener;
+    private View.OnClickListener mListener;
 
-//    public interface OnLinkClickListener {
-//        void onLinkClick(int position);
-//    }
+    // public interface OnClickListener {
+    //     void onClick(int position);
+    // }
+
+    // public void setOnClickListener(View.OnClickListener listener) {
+    //     mListener = listener;
+    // }
 
     public EntriesHistoryRecyclerAdapter(ArrayList<EntryItem> list) {
         this.entriesHistoryList = list;
@@ -29,7 +33,7 @@ public class EntriesHistoryRecyclerAdapter extends RecyclerView.Adapter<EntriesH
     @Override
     public EntriesHistoryRecyclerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.entry_card, parent, false);
-        return new EntriesHistoryRecyclerHolder(view);
+        return new EntriesHistoryRecyclerHolder(view, mListener);
     }
 
     @Override
