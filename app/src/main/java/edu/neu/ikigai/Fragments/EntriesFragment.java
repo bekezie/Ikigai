@@ -55,6 +55,7 @@ public class EntriesFragment extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+
         // Searches the 'worksheet' branch in the database
         mDatabase.child("worksheet").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

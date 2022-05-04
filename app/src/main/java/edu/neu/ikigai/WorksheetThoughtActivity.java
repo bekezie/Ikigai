@@ -35,7 +35,7 @@ public class WorksheetThoughtActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     //private String updateWorksheet;
 
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worksheet_thought);
