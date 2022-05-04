@@ -83,6 +83,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cognitive_distortions" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emotional Reasoning\nAll or Nothing Thinking"
+            app:layout_constraintBottom_toTopOf="@+id/reasonable_thoughts"
+            app:layout_constraintTop_toBottomOf="@+id/cognitive_distortions"
+            tools:layout_editor_absoluteX="152dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

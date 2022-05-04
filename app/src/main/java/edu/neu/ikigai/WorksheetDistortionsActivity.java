@@ -29,32 +29,25 @@ public class WorksheetDistortionsActivity extends AppCompatActivity {
     private ArrayList<String> distortions;
     private String worksheetId;
     private FirebaseAuth mAuth;
-
+    private Bundle currentState;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worksheet_distortions);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
         worksheetId = this.getIntent().getStringExtra("worksheetId");
-        // Todo: populate array list with data from database
-        //  or create a new array list
-        //  set checked to true for checked boxes when saved data is being used
-
-        // Todo: store actual checkboxes so you can activate and deactivate them whenever onCreate called
         distortions = new ArrayList<>();
-        // could use distortions var for onResume and init() for onCreate
+        currentState = savedInstanceState;
         init(savedInstanceState);
-        // will want to find view by id and check it
-        // but want to
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        init(currentState);
     }
-    //Todo: perhaps set onClick listener to avoid passing view unnecessarily
+
     public void onDistortionClicked(View view) {
         CheckBox checkbox= (CheckBox) view;
         boolean checked = checkbox.isChecked();
@@ -69,7 +62,6 @@ public class WorksheetDistortionsActivity extends AppCompatActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("distortions", distortions);
         mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
-        //mDatabase.child("worksheet").child("austin").child(worksheetId).updateChildren(map);
     }
 
     public void onDistortionNext(View view) {
@@ -91,13 +83,19 @@ public class WorksheetDistortionsActivity extends AppCompatActivity {
         }
     }
     public void getSaved(String sheetId) {
+        System.out.println("sheetId: " + sheetId);
+        System.out.println("uId: " + mAuth.getCurrentUser().getUid());
         DatabaseReference ref =  mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(sheetId).child("distortions");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 for (DataSnapshot ss : snapshot.getChildren()) {
-                    //System.out.println(ss);
+                    String distortion = (String) ss.getValue();
+                    String[] distortionSplit = distortion.split(":");
+                    String id = distortionSplit[0];
+                    String name = distortionSplit[1];
+                    CheckBox c = findViewById(Integer.parseInt(id));
+                    c.setChecked(true);
                 }
             }
 

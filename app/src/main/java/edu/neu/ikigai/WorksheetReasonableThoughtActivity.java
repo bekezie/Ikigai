@@ -63,9 +63,6 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
         });
         currentState = savedInstanceState;
         init(savedInstanceState);
-        // if saved instance state == null
-        // pull from db
-        // else use what's in saved instance state
     }
 
     @Override
@@ -73,13 +70,6 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
         super.onResume();
         init(currentState);
     }
-    // Todo: might not be necessary for edit text views
-//    @Override
-//    protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        outState.putString("reasonThoughtText", thoughtEt.getText().toString());
-//        outState.putString("reasonJournalText", journalEt.getText().toString());
-//        super.onSaveInstanceState(outState);
-//    }
 
     public void save() {
         Thought thought = new Thought(thoughtEt.getText().toString(), journalEt.getText().toString());
@@ -87,7 +77,6 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
         map.put("reasonableThought", thought);
         // Todo: uncomment
         mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
-        //mDatabase.child("worksheet").child("ndabe").child(worksheetId).updateChildren(map);
     }
 
     public void next() {
@@ -97,52 +86,16 @@ public class WorksheetReasonableThoughtActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //maintain state in the event of a rotation
-    //pull data from database everytime a rotation occurs?
     private void init(Bundle savedInstanceState) {
         initialItemData(savedInstanceState);
 
     }
 
-//    //maintain state in the event of a rotation
-//    //pull data from database everytime a rotation occurs?
-//    private void init(Bundle savedInstanceState) {
-//        initialItemData(savedInstanceState);
-//    }
-
     private void initialItemData(Bundle savedInstanceState) {
-        // there might be an issue of it pulling from the database whenever screen is rotated
-        // but the person is editing that text
-        // check to see what is in savedInstanceState by default
-        // otherwise. Could check what's in database vs. what's in edit text view to see what to do?
-
-        // if there is saved instance state
         if (savedInstanceState == null) {
             getSaved(worksheetId);
         }
-        // set edit text values with that state
-        // else no saved instance state (maybe else-if)
-        // pull from db using worksheet id
-        // if worksheet.reasonThought not empty
-        // set edit text values with data from db
     }
-
-//    private void initialItemData(Bundle savedInstanceState) {
-//        // if there is saved instance state
-//        if (savedInstanceState != null) {
-//            if (savedInstanceState.containsKey("reasonThoughtText")) {
-//                thoughtEt.setText(savedInstanceState.getString("reasonThoughtText"));
-//            }
-//            if (savedInstanceState.containsKey("reasonJournalText")) {
-//                thoughtEt.setText(savedInstanceState.getString("reasonJournalText"));
-//            }
-//        }
-//        // set edit text values with that state
-//        // else no saved instance state (maybe else-if)
-//        // pull from db using worksheet id
-//        // if worksheet.reasonThought not empty
-//        // set edit text values with data from db
-//    }
 
     public void getSaved(String sheetId) {
         DatabaseReference ref =  mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(sheetId).child("reasonableThought");
