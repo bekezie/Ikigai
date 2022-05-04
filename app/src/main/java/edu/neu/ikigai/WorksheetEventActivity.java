@@ -111,9 +111,9 @@ public class WorksheetEventActivity extends AppCompatActivity {
         mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).updateChildren(map);
     }
 
-    //Todo: change back to WorksheetThoughtActivity
+    // Todo: change back to WorksheetThoughtActivity
     public void next() {
-        Intent intent = new Intent(this, WorksheetReasonableThoughtActivity.class);
+        Intent intent = new Intent(this, WorksheetDistortionsActivity.class);
         intent.putExtra("worksheetId", worksheetId);
         startActivity(intent);
     }
