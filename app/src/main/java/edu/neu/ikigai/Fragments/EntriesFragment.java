@@ -2,6 +2,7 @@ package edu.neu.ikigai.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +37,7 @@ public class EntriesFragment extends Fragment {
 
     private View view;
 
+    private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
     // RecyclerView and RecyclerAdapter
@@ -44,13 +47,16 @@ public class EntriesFragment extends Fragment {
 
     ArrayList<EntryItem> entriesHistoryList = new ArrayList<EntryItem>();
 
-    private String user = "austin"; // HARDCODED @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    private String user;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_entries, container, false);
+
+        user = mAuth.getInstance().getCurrentUser().getUid();
+
         entriesHistoryList = new ArrayList<>();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -63,7 +69,7 @@ public class EntriesFragment extends Fragment {
                 // Searches for the user in the 'history' branch
                 for (DataSnapshot worksheet_user : snapshot.getChildren()) {
                     // if the user in the 'history' branch is found
-                    if (String.valueOf(worksheet_user.getKey()).equalsIgnoreCase(user)) { // HARDCODED USER @@@@@@@@@@@@@@@@@
+                    if (String.valueOf(worksheet_user.getKey()).equalsIgnoreCase(user)) {
 
                         int worksheetNumber = 1;
 
@@ -83,7 +89,6 @@ public class EntriesFragment extends Fragment {
                         }
                     }
                 }
-
                 buildRecyclerView();
             }
 
@@ -130,5 +135,16 @@ public class EntriesFragment extends Fragment {
         String currentDate = dateFormat.format(date);
         // Toast.makeText(BottomNavigationBarFragments.this,currentDate,Toast.LENGTH_LONG).show();
         return currentDate;
+    }
+
+    /**
+     * Get the name of the user currently logged in.
+     *
+     * @return the sender's name.
+     */
+    public String getSender() {
+        Intent intent = getActivity().getIntent();
+        String sender = intent.getStringExtra("SENDER_USERNAME");
+        return sender;
     }
 }
