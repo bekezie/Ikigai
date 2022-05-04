@@ -82,9 +82,10 @@ public class EntriesFragment extends Fragment {
                             String date = dateFormat.format(new Date(timestamp));
                             // Log.d("date:", date);
 
-                            String worksheetID = "Worksheet " + worksheetNumber;
+                            // "Worksheet 1", "Worksheet 2", "Worksheet 3", etc.
+                            String worksheetName = "Worksheet " + worksheetNumber;
 
-                            entriesHistoryList.add(new EntryItem(date, worksheetID, worksheet_user_firebase_key.getKey()));
+                            entriesHistoryList.add(new EntryItem(date, worksheetName, worksheet_user_firebase_key.getKey()));
                             worksheetNumber++;
                         }
                     }
