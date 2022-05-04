@@ -83,8 +83,6 @@ public class WorksheetDistortionsActivity extends AppCompatActivity {
         }
     }
     public void getSaved(String sheetId) {
-        System.out.println("sheetId: " + sheetId);
-        System.out.println("uId: " + mAuth.getCurrentUser().getUid());
         DatabaseReference ref =  mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(sheetId).child("distortions");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -96,6 +94,7 @@ public class WorksheetDistortionsActivity extends AppCompatActivity {
                     String name = distortionSplit[1];
                     CheckBox c = findViewById(Integer.parseInt(id));
                     c.setChecked(true);
+                    distortions.add(distortion);
                 }
             }
 
