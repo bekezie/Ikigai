@@ -48,7 +48,7 @@ public class WorksheetThoughtActivity extends AppCompatActivity {
         saveButton = (Button) findViewById(R.id.thoughtSaveButton);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-
+        SavedWorksheet();
         //Log.w(TAG, "Update worksheet " + updateWorksheet);
 
 //        if (worksheetId != null) {
@@ -67,9 +67,7 @@ public class WorksheetThoughtActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(worksheetId == null){
-                    save();
-                }
+                save();
                 next();
             }
         });
@@ -86,7 +84,7 @@ public class WorksheetThoughtActivity extends AppCompatActivity {
 
     public void SavedWorksheet() {
         // Write a message to the database
-        DatabaseReference myRef = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).child("thought");
+        DatabaseReference myRef = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).child(worksheetId).child("autoThought");
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override

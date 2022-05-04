@@ -88,6 +88,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
         saveButton = (Button) findViewById(R.id.eventSaveButton);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        SavedWorksheet();
         //Log.w(TAG, "Update worksheet "+ updateWorksheet);
 
 //        if(worksheetId != null){
@@ -105,9 +106,7 @@ public class WorksheetEventActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(worksheetId == null){
-                    save();
-                }
+                save();
                 next();
             }
         });

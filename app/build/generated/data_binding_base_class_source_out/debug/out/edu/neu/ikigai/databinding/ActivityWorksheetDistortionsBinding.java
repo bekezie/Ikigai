@@ -58,9 +58,6 @@ public final class ActivityWorksheetDistortionsBinding implements ViewBinding {
   @NonNull
   public final CheckBox distortionShouldStatements;
 
-  @NonNull
-  public final TextView worksheetTitle;
-
   private ActivityWorksheetDistortionsBinding(@NonNull ConstraintLayout rootView,
       @NonNull TextView cognitiveDistortionsTitle, @NonNull CheckBox distortionAllOrNothingThinking,
       @NonNull CheckBox distortionCatastrophizingAndMinimizing,
@@ -68,7 +65,7 @@ public final class ActivityWorksheetDistortionsBinding implements ViewBinding {
       @NonNull CheckBox distortionMentalFiltering, @NonNull CheckBox distortionMindReading,
       @NonNull Button distortionNextButton, @NonNull CheckBox distortionOvergeneralizing,
       @NonNull Button distortionSaveButton, @NonNull ScrollView distortionScrollView,
-      @NonNull CheckBox distortionShouldStatements, @NonNull TextView worksheetTitle) {
+      @NonNull CheckBox distortionShouldStatements) {
     this.rootView = rootView;
     this.cognitiveDistortionsTitle = cognitiveDistortionsTitle;
     this.distortionAllOrNothingThinking = distortionAllOrNothingThinking;
@@ -82,7 +79,6 @@ public final class ActivityWorksheetDistortionsBinding implements ViewBinding {
     this.distortionSaveButton = distortionSaveButton;
     this.distortionScrollView = distortionScrollView;
     this.distortionShouldStatements = distortionShouldStatements;
-    this.worksheetTitle = worksheetTitle;
   }
 
   @Override
@@ -184,18 +180,12 @@ public final class ActivityWorksheetDistortionsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.worksheetTitle;
-      TextView worksheetTitle = ViewBindings.findChildViewById(rootView, id);
-      if (worksheetTitle == null) {
-        break missingId;
-      }
-
       return new ActivityWorksheetDistortionsBinding((ConstraintLayout) rootView,
           cognitiveDistortionsTitle, distortionAllOrNothingThinking,
           distortionCatastrophizingAndMinimizing, distortionEmotionalReasoning,
           distortionFortuneTelling, distortionMentalFiltering, distortionMindReading,
           distortionNextButton, distortionOvergeneralizing, distortionSaveButton,
-          distortionScrollView, distortionShouldStatements, worksheetTitle);
+          distortionScrollView, distortionShouldStatements);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

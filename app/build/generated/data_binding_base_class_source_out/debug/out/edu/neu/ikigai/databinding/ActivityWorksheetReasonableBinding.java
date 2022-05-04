@@ -42,14 +42,11 @@ public final class ActivityWorksheetReasonableBinding implements ViewBinding {
   @NonNull
   public final TextView worksheetThoughtTitle;
 
-  @NonNull
-  public final TextView worksheetTitle;
-
   private ActivityWorksheetReasonableBinding(@NonNull ConstraintLayout rootView,
       @NonNull EditText journalEditText, @NonNull TextView journalTextView,
       @NonNull EditText thoughtEditText, @NonNull Button thoughtNextButton,
       @NonNull Button thoughtSaveButton, @NonNull TextView thoughtTextView,
-      @NonNull TextView worksheetThoughtTitle, @NonNull TextView worksheetTitle) {
+      @NonNull TextView worksheetThoughtTitle) {
     this.rootView = rootView;
     this.journalEditText = journalEditText;
     this.journalTextView = journalTextView;
@@ -58,7 +55,6 @@ public final class ActivityWorksheetReasonableBinding implements ViewBinding {
     this.thoughtSaveButton = thoughtSaveButton;
     this.thoughtTextView = thoughtTextView;
     this.worksheetThoughtTitle = worksheetThoughtTitle;
-    this.worksheetTitle = worksheetTitle;
   }
 
   @Override
@@ -130,15 +126,9 @@ public final class ActivityWorksheetReasonableBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.worksheetTitle;
-      TextView worksheetTitle = ViewBindings.findChildViewById(rootView, id);
-      if (worksheetTitle == null) {
-        break missingId;
-      }
-
       return new ActivityWorksheetReasonableBinding((ConstraintLayout) rootView, journalEditText,
           journalTextView, thoughtEditText, thoughtNextButton, thoughtSaveButton, thoughtTextView,
-          worksheetThoughtTitle, worksheetTitle);
+          worksheetThoughtTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

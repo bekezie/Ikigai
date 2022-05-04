@@ -39,7 +39,7 @@ public class EntriesHistoryRecyclerAdapter extends RecyclerView.Adapter<EntriesH
     @Override
     public void onBindViewHolder(@NonNull EntriesHistoryRecyclerHolder holder, int position) {
         EntryItem currentCard = entriesHistoryList.get(position);
-
+        holder.key = currentCard.getFirebaseKey();
         holder.worksheetEntryDate.setText(currentCard.getWorksheetEntryDate());
         holder.worksheetEntryNumber.setText(currentCard.getWorksheetEntryNumber());
     }

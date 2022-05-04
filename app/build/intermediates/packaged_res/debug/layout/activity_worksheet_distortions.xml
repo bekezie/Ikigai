@@ -8,35 +8,16 @@
         <!--Todo: make action/tool bar that has "WORKSHEET" and back button-->
         <!--Todo: add border to bottom-->
 
-    <TextView
-        android:id="@+id/worksheetTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="WORKSHEET"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:layout_width="25dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/back"
-        app:layout_constraintEnd_toStartOf="@+id/worksheetTitle"
-        app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cognitiveDistortionsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:text="Cognitive Distortions"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/worksheetTitle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/distortionScrollView"
