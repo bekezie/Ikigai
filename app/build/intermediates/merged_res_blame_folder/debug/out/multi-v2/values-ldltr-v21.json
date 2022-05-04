@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+            "map": [
+                {
+                    "source": "/Users/macuser/.gradle/caches/transforms-3/14afabc227bbe225b3420a632b79b486/transformed/appcompat-1.4.1/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "112",
+                        "endOffsets": "163"
+                    }
+                }
+            ]
+        }
+    ]
+}

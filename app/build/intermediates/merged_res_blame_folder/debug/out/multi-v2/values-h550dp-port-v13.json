@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h550dp-port-v13/values-h550dp-port-v13.xml",
+            "map": [
+                {
+                    "source": "/Users/macuser/.gradle/caches/transforms-3/74a76c514a2f6353862f1e47c80fa160/transformed/material-1.5.0/res/values-h550dp-port-v13/values-h550dp-port-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "76",
+                        "endOffsets": "127"
+                    }
+                }
+            ]
+        }
+    ]
+}

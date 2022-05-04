@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Fragments.HomeSummaryFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/cognitive_distortions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="4.CognitiveDistortions"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/reasonable_thoughts"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/primary_emotion" />
+
+        <TextView
+            android:id="@+id/primary_emotion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="3. PrimaryEmotion"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/cognitive_distortions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/automatic_thought" />
+
+        <TextView
+            android:id="@+id/automatic_thought"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="2. AutomaticThought"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/primary_emotion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/triggering_event" />
+
+        <TextView
+            android:id="@+id/triggering_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="1. TriggeringEvent"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/automatic_thought"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="334dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="60dp"
+            android:text="This will be the home screen if the user has created an entry for today. A summary of the entry will be displayed here."
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/triggering_event"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <TextView
+            android:id="@+id/reasonable_thoughts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5. ReasonableThought"
+            android:textSize="30dp"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.527"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cognitive_distortions" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

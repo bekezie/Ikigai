@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_login.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_entries.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/fragment_entries.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_worksheet_create.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_worksheet_create.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_forgot_password.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_forgot_password.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_worksheet_distortions.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_worksheet_distortions.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_exercise.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/fragment_exercise.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_home_no_summary.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/fragment_home_no_summary.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/entry_card.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/entry_card.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_worksheet_reasonable.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_worksheet_reasonable.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_worksheet_details.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_worksheet_details.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_worksheet_summary.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_worksheet_summary.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_worksheet_event.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_worksheet_event.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_summary.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/fragment_summary.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_worksheet_thought.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_worksheet_thought.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_home_summary.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/fragment_home_summary.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_more.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/fragment_more.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_register.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_register.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_bottom_navigation_bar_fragments.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_bottom_navigation_bar_fragments.xml"
+    },
+    {
+        "merged": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_profile.xml",
+        "source": "/Users/macuser/Documents/School/Classes/Spring_2022/CS_5520_MobileDev/Project/Ikigai/app/src/main/res/layout/activity_profile.xml"
+    }
+]
