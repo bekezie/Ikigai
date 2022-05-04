@@ -11,8 +11,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import edu.neu.ikigai.models.Distortion;
 import edu.neu.ikigai.models.Thought;
 import edu.neu.ikigai.models.TriggeringEvent;
 import edu.neu.ikigai.models.WorkSheet;
@@ -31,7 +29,6 @@ public class WorksheetCreate extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         worksheetId = mDatabase.child("worksheet").child(mAuth.getCurrentUser().getUid()).push().getKey();
-        //Todo: check with Minh to see if this is necessary
         WorkSheet ws = new WorkSheet();
         ws.setEvent(new TriggeringEvent("","", ""));
         ws.setThought(new Thought("", ""));
